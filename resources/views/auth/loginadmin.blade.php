@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="form-footer">
-                      <button type="submit" class="btn btn-danger w-100">Sign in</button>
+                      <button type="submit" class="btn btn-success w-100">Sign in</button>
                     </div>
                   </form>
                 </div>

@@ -8,34 +8,27 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Pelanggan extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = "tb_admin";
-    protected $primaryKey = "admin_id";
+    protected $table = "tb_pelanggan";
+    protected $primaryKey = "pelanggan_id";
 
     protected $fillable = [
         'username',
-        'email',
         'password',
+        'nama_pelanggan',
+        'no_hp',
+        'email',
+        'alamat'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

@@ -33,7 +33,6 @@
                         </div>
                         <div class="col">
                         <div class="font-weight-medium">
-                            {{ $countVoters->jml_voters }}
                         </div>
                         <div class="text-muted">
                             Jumlah Voters
@@ -62,7 +61,6 @@
                         </div>
                         <div class="col">
                         <div class="font-weight-medium">
-                        {{ $counttps->jml_tps }}
                         </div>
                         <div class="text-muted">
                             Jumlah TPS
@@ -84,7 +82,6 @@
                         </div>
                         <div class="col">
                         <div class="font-weight-medium">
-                        {{ $countusers->jml_users }}
                         </div>
                         <div class="text-muted">
                             Jumlah Caleg
@@ -106,7 +103,6 @@
                         </div>
                         <div class="col">
                         <div class="font-weight-medium">
-                        {{ $countparpol->jml_saksi }}
                         </div>
                         <div class="text-muted">
                             Jumlah Saksi
@@ -120,95 +116,4 @@
     </div>
     
 </div>
-@if(Auth::guard()->user()->id_role == 1)
-<div class="page-body">
-    <div class="container-xl">
-        <div class="row">
-
-            <div class="col-md-6 col-xl-4">
-                
-            </div>
-
-            <div class="col-md-6 col-xl-4">
-                <div class="card card-sm">
-                    <div class="card-body">
-                        <b>Form Kordinator</b>
-                        
-                            <div class="form-group">
-                                <select name="kecamatan" id="kecamatan" class="form-control" >
-                                    <option value="">Pilih Kecamatan</option>
-                                    @foreach ($Otps2 as $o)
-                                        <option value="{{ $o->kecamatan }}">{{ $o->kecamatan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group mt-2">
-                                <button class="btn btn-danger w-100" id="frmCari">Cari</button>
-                            </div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-xl-4">
-                
-            </div>
-        </div>
-    </div>
-    
-</div>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-@endif
-
 @endsection
-
-@push('myscripct')
-    <script>
-
-            $("#frmCari").click(function(e){
-                var kecamatan = $("#kecamatan").val();
-
-                if(kecamatan==""){
-                    Swal.fire({
-                    title: 'Warning!',
-                    text: 'Kecamatan Harus Diisi !!',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                    }).then((result) => {
-                        $("#kecamatan").focus();
-                    });
-
-                    return false;
-                }
-                var urlCaleg = '/cari/monitor/'+kecamatan;
-                $.ajax({
-                  type: 'GET',
-                  url: urlCaleg,
-                success: function(respond){
-                    window.location.href = urlCaleg;
-                },
-                });
-            
-            });
-
-    </script>
-@endpush

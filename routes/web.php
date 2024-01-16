@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['guest:caleg'])->group(function(){
+Route::middleware(['guest:buy'])->group(function(){
     Route::get('/', function () {
         return view('auth.login');
     })->name('login');
@@ -31,7 +31,7 @@ Route::middleware(['guest:user'])->group(function(){
 });
 
 
-Route::middleware(['auth:caleg'])->group(function(){
+Route::middleware(['auth:buy'])->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/proseslogout', [AuthController::class, 'proseslogout']);
     //update profile 

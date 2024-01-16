@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard('caleg')->check()) {
+            if (Auth::guard('buy')->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }
             if (Auth::guard('user')->check()) {

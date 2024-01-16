@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
-    <title>SAHABAT ADES</title>
+    <title>APPS JaHIT</title>
     <meta name="description" content="Mobilekit HTML Mobile UI Kit">
     <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" sizes="32x32">
@@ -31,10 +31,10 @@
 
         <div class="login-form mt-1">
             <div class="section">
-                <img src="{{ asset('dist/img/logo_merah.png') }}" alt="image" class="form-image">
+                <img src="{{ asset('assets/img/login/login.jpg') }}" alt="image" class="form-image">
             </div>
             <div class="section mt-1">
-                <h1>SAHABAT ADES</h1>
+                <h1>APPS JaHIT</h1>
                 <h4>Silahkan Login</h4>
             </div>
             <div class="section mt-1 mb-5">
@@ -50,7 +50,7 @@
                     @csrf
                     <div class="form-group boxed">
                         <div class="input-wrapper">
-                            <input type="text" name="nik_ktp" class="form-control" id="nik_ktp" placeholder="Username">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -65,13 +65,15 @@
                             </i>
                         </div>
                     </div>
-
                     <div class="form-links mt-2">
-                        <div><a href="/panel" class="text-muted">Login Sebagai Caleg/Kordinator?</a></div>
+                        <div>Tidak Punya Akun?<a href="/register" class="text-muted"> Register Now</a></div>
+                    </div>
+                    <div class="form-links mt-2">
+                        <div><a href="/panel" class="text-muted">Login Sebagai admin?</a></div>
                     </div>
 
                     <div class="form-button-group">
-                        <button type="submit" class="btn btn-danger btn-block btn-lg">Log in</button>
+                        <button type="submit" class="btn btn-success btn-block btn-lg">Log in</button>
                     </div>
 
                 </form>
