@@ -20,9 +20,14 @@ class DashboardController extends Controller
     }
 
     public function dashboardadmin()
-    {
-        
-        return view('dashboard.dashboardadmin');
+    {   
+        $cpel = DB::table('tb_pelanggan')
+        ->selectRaw('COUNT(pelanggan_id) as jpel')
+        ->first();
+        $cpes = DB::table('tb_pesanan')
+        ->selectRaw('COUNT(pesanan_id) as jpes')
+        ->first();
+        return view('dashboard.dashboardadmin', compact('cpel', 'cpes'));
     }
 
 }

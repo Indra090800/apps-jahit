@@ -2,32 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\Harga;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 
-class RoleController extends Controller
+class HargaController extends Controller
 {
     public function index(Request $request)
     {
-        $role = DB::table('tb_role')->get();
+        $query = Harga::query();
+        $query->select('tb_jenis.*');
+        if(!empty($request->jenis_jahitan)){
+            $query->where('jenis_jahitan', 'like', '%'. $request->jenis_jahitan.'%');
+        }
+        $jenis = $query->paginate(25);
         
-        return view('master.role', compact('role'));
+        return view('master.jenis', compact('jenis'));
     }
 
-    public function addRole(Request $request)
+    public function addHarga(Request $request)
     {
-        $nama_role     = $request->nama_role;
+        $jenis_jahitan     = $request->jenis_jahitan;
+        $harga             = $request->harga;
 
         try {
             $data = [
-                'nama_role'    => $nama_role,
+                'jenis_jahitan'    => $jenis_jahitan,
+                'harga'            => $harga,
             ];
-            $simpan = DB::table('tb_role')->insert($data);
+            $simpan = DB::table('tb_jenis')->insert($data);
         if($simpan){
             return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!!']);
         }
@@ -41,15 +45,17 @@ class RoleController extends Controller
         }
     }
 
-    public function editRole($id_role, Request $request)
+    public function editHarga($jenis_id, Request $request)
     {
-        $nama_role     = $request->nama_role;
+        $jenis_jahitan     = $request->jenis_jahitan;
+        $harga             = $request->harga;
 
         try {
             $data = [
-                'nama_role'    => $nama_role,
+                'jenis_jahitan'    => $jenis_jahitan,
+                'harga'            => $harga,
             ];
-            $update = DB::table('tb_role')->where('id_role', $id_role)->update($data);
+            $update = DB::table('tb_jenis')->where('jenis_id', $jenis_id)->update($data);
         if($update){
             return Redirect::back()->with(['success' => 'Data Berhasil Di Update!!']);
         }
@@ -58,9 +64,9 @@ class RoleController extends Controller
         }
     }
 
-    public function delete($id_role)
+    public function delete($jenis_id)
     {
-        $delete =  DB::table('tb_role')->where('id_role', $id_role)->delete();
+        $delete =  DB::table('tb_jenis')->where('jenis_id', $jenis_id)->delete();
 
         if($delete){
             return Redirect::back()->with(['success' => 'Data Berhasil Di Delete!!']);

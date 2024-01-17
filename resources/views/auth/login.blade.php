@@ -40,11 +40,16 @@
             <div class="section mt-1 mb-5">
                 @php
                     $messagewarning = Session::get('warning');
+                    $messagesuccess = Session::get('success');
                 @endphp
                 @if (Session::get('warning'))
                     <div class="alert alert-outline-warning">
                         {{ $messagewarning }}
                     </div>
+                @elseif(Session::get('success'))
+                <div class="alert alert-outline-success">
+                    {{ $messagesuccess }}
+                </div>
                 @endif
                 <form action="/proseslogin" method="POST">
                     @csrf

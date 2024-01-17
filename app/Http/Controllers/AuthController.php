@@ -35,9 +35,9 @@ class AuthController extends Controller
             'password'   => $request->password
            ])) {
                return redirect('panel/dashboardadmin');
-           }else{
-               return redirect('/panel')->with(['warning' => 'Email / Password Salah !!']);
-           }
+        }else{
+            return redirect('/panel')->with(['warning' => 'Email / Password Salah !!']);
+        }
     }
 
     public function proseslogoutadmin()
