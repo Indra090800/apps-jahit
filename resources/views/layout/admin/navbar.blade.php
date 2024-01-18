@@ -59,18 +59,12 @@
                 <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
                 @endif
                 <div class="d-none d-xl-block ps-2">
-                  <div>{{ Auth::guard('user')->user()->nama_caleg }}</div>
+                  <div>{{ Auth::guard('user')->user()->nama_users }}</div>
                   <div class="mt-1 small text-muted">
                     @if (Auth::guard('user')->user()->id_role == 1)
-                        Caleg
+                        Penjahit
                     @elseif (Auth::guard('user')->user()->id_role == 2)
-                        admin
-                    @elseif (Auth::guard('user')->user()->id_role == 3)
-                        Parpol
-                    @elseif (Auth::guard('user')->user()->id_role == 5)
-                        Kor Kecamatan
-                    @elseif (Auth::guard('user')->user()->id_role == 6)
-                        Kor Kelurahan
+                        Admin
                     @endif
                   </div>
                 </div>

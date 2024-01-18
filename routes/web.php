@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HargaController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +61,30 @@ Route::middleware(['auth:user'])->group(function(){
     Route::post('/addPelanggan', [PelangganController::class, 'addPelanggan']);
     Route::post('/pelanggan/{pelanggan_id}/edit', [PelangganController::class, 'editPelanggan']);
     Route::post('/pelanggan/{pelanggan_id}/delete', [PelangganController::class, 'delete']);
+
+    //pesanan
+    Route::get('/master/pesanan', [PesananController::class, 'index']);
+    Route::post('/addPesanan', [PesananController::class, 'addPesanan']);
+    Route::post('/pesanan/{pesanan_id}/edit', [PesananController::class, 'editPesanan']);
+    Route::post('/pesanan/{pesanan_id}/delete', [PesananController::class, 'delete']);
+
+    Route::post('/pesanan/{pesanan_id}/editStatus', [PesananController::class, 'editStatus']);
+
+    //Rating
+    Route::get('/master/rating', [RatingController::class, 'index']);
+    Route::post('/addRating', [RatingController::class, 'addRating']);
+    Route::post('/rating/{rating_id}/edit', [RatingController::class, 'editRating']);
+    Route::post('/rating/{rating_id}/delete', [RatingController::class, 'delete']);
+
+    Route::post('/rating/{rating_id}/editSRating', [RatingController::class, 'editSRating']);
+
+    //pembayaran
+    Route::get('/master/pembayaran', [PembayaranController::class, 'index']);
+    Route::post('/addPembayaran', [PembayaranController::class, 'addPembayaran']);
+    Route::post('/pembayaran/{pembayaran_id}/edit', [PembayaranController::class, 'editPembayaran']);
+    Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
+
+    Route::post('/pembayaran/{pembayaran_id}/editSPembayaran', [PembayaranController::class, 'editPembayaran']);
 
     //role
     Route::get('/master/role', [RoleController::class, 'index']);
