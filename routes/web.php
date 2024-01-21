@@ -43,7 +43,19 @@ Route::middleware(['guest:user'])->group(function(){
 Route::middleware(['auth:buy'])->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/proseslogout', [AuthController::class, 'proseslogout']);
-    //update profile 
+    //update profile
+
+    //pesan jahit
+    Route::get('/jahit/pesan', [PelangganController::class, 'pesan']);
+    Route::post('/addPesanan', [PesananController::class, 'addPesanan']);
+    Route::post('/pesanan/{pesanan_id}/edit', [PesananController::class, 'editPesanan']);
+    Route::post('/pesanan/{pesanan_id}/delete', [PesananController::class, 'delete']);
+
+    Route::get('/metodebayar', [PembayaranController::class, 'metodebayar']);
+    Route::get('/metodebayar/{no_antrian}', [PembayaranController::class, 'bayar']);
+    Route::post('/addPembayaran', [PembayaranController::class, 'addPembayaran']);
+    Route::post('/pembayaran/{pembayaran_id}/edit', [PembayaranController::class, 'editPembayaran']);
+    Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
 });
 
 Route::middleware(['auth:user'])->group(function(){
@@ -64,8 +76,6 @@ Route::middleware(['auth:user'])->group(function(){
 
     //pesanan
     Route::get('/master/pesanan', [PesananController::class, 'index']);
-    Route::post('/addPesanan', [PesananController::class, 'addPesanan']);
-    Route::post('/pesanan/{pesanan_id}/edit', [PesananController::class, 'editPesanan']);
     Route::post('/pesanan/{pesanan_id}/delete', [PesananController::class, 'delete']);
 
     Route::post('/pesanan/{pesanan_id}/editStatus', [PesananController::class, 'editStatus']);
@@ -80,8 +90,6 @@ Route::middleware(['auth:user'])->group(function(){
 
     //pembayaran
     Route::get('/master/pembayaran', [PembayaranController::class, 'index']);
-    Route::post('/addPembayaran', [PembayaranController::class, 'addPembayaran']);
-    Route::post('/pembayaran/{pembayaran_id}/edit', [PembayaranController::class, 'editPembayaran']);
     Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
 
     Route::post('/pembayaran/{pembayaran_id}/editSPembayaran', [PembayaranController::class, 'editPembayaran']);

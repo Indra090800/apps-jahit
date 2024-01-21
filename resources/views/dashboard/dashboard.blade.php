@@ -6,9 +6,9 @@
             <div id="user-detail">
                 <div class="avatar">
 
-                    <!-- @if (!empty(Auth::guard()->user()->foto_saksi))
+                    <!-- @if (!empty(Auth::guard()->user()->foto_pelanggan))
                     @php
-                        $path = Storage::url('public/uploads/saksi/'.Auth::guard('caleg')->user()->foto_saksi);
+                        $path = Storage::url('public/uploads/saksi/'.Auth::guard('buy')->user()->foto_pelanggan);
                     @endphp
                     <img src="{{ url($path) }}" alt="avatar" class="imaged w64 rounded" style="height: 60px;">
                     @else -->
@@ -17,8 +17,8 @@
 
                 </div>
                 <div id="user-info">
-                    <h2 id="user-name">Dewi S</h2>
-                    <span id="user-role"><b>Owner</span>
+                    <h2 id="user-name">{{ Auth::guard('buy')->user()->nama_pelanggan }}</h2>
+                    <span id="user-role"><b>Users</span>
                 </div>
             </div>
         </div>
@@ -39,22 +39,22 @@
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="danger" style="font-size: 40px;">
-                                    <ion-icon name="calendar-number"></ion-icon>
+                                <a href="/metodebayar" class="danger" style="font-size: 40px;">
+                                    <ion-icon name="wallet-outline"></ion-icon>
                                 </a>
                             </div>
                             <div class="menu-name">
-                                <span class="text-center">Kalender</span>
+                                <span class="text-center">Metode Bayar</span>
                             </div>
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
                                 <a href="" class="warning" style="font-size: 40px;">
-                                    <ion-icon name="document-text"></ion-icon>
+                                    <ion-icon name="pricetags-outline"></ion-icon>
                                 </a>
                             </div>
                             <div class="menu-name">
-                                <span class="text-center">Histori</span>
+                                <span class="text-center">Lihat Pesanan</span>
                             </div>
                         </div>
                         <div class="item-menu text-center">
@@ -85,16 +85,34 @@
             <div class="todaypresence">
                 <div class="row">
                     <div class="col-12">
+                        <form action="/dashboard" method="GET">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <input type="text" name="jenis_jahitan" class="form-control" value="{{ Request('jenis_jahitan') }}" placeholder="Jenis Jahitan">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary">Cari</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
-                                    <th>Nama TPS</th>
-                                    <th>Alamat</th>
-                                    <th>Desa</th>
-                                    <th>Kecamatan</th>
-                                    <th>Lokasi</th>
+                                    <th>Jenis Jahitan</th>
+                                    <th>Harga</th>
                                 </tr>
-                                
+                                @foreach ($jenis as $j)
+                                    <tr>
+                                        <td>{{ $j->jenis_jahitan }}</td>
+                                        <td>{{ $j->harga }}</td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -121,7 +139,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel">
                         <ul class="listview image-listview">
 
-                            
+
                             <li>
                                 <div class="item">
                                     <div class="icon-box bg-primary">
@@ -134,7 +152,7 @@
                                     </div>
                                 </div>
                             </li>
-                            
+
 
                         </ul>
                         <style>

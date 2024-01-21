@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Caleg;
-use App\Models\TPS;
-use App\Models\Saksi;
-use App\Models\Voters;
+use App\Models\Harga;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
-        return view('dashboard.dashboard');
+        $query = Harga::query();
+        $query->select('tb_jenis.*');
+        if(!empty($request->jenis_jahitan)){
+            $query->where('jenis_jahitan', 'like', '%'. $request->jenis_jahitan.'%');
+        }
+        $jenis = $query->paginate(5);
+        return view('dashboard.dashboard', compact('jenis'));
     }
 
     public function dashboardadmin()
-    {   
+    {
         $cpel = DB::table('tb_pelanggan')
         ->selectRaw('COUNT(pelanggan_id) as jpel')
         ->first();

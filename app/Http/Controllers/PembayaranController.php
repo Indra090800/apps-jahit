@@ -19,7 +19,7 @@ class PembayaranController extends Controller
             $query->where('pesanan_id', 'like', '%'. $request->pesanan_id.'%');
         }
         $pembayaran = $query->paginate(25);
-        
+
         return view('master.pembayaran', compact('pembayaran'));
     }
 
@@ -28,7 +28,7 @@ class PembayaranController extends Controller
         $pesanan_id          = $request->pesanan_id;
         $metode_bayar        = $request->metode_bayar;
         $total_bayar         = $request->total_bayar;
-        $status_bayar        = $request->status_bayar;
+        $status_bayar        = 0;
 
         if($request->hasFile('bukti_bayar')){
             $bukti_bayar = $pesanan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
@@ -42,15 +42,16 @@ class PembayaranController extends Controller
                 'metode_bayar'        => $metode_bayar,
                 'total_bayar'         => $total_bayar,
                 'bukti_bayar'         => $bukti_bayar,
-                'stastatus_bayartus'  => $status_bayar,
+                'status_bayar'        => $status_bayar,
             ];
+            dd($data);
             $simpan = DB::table('tb_pembayaran')->insert($data);
         if($simpan){
             if($request->hasFile('bukti_bayar')){
                 $folderPath = "public/uploads/bukti_bayar/";
                 $request->file('bukti_bayar')->storeAs($folderPath, $bukti_bayar);
             }
-            return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!!']);
+            return Redirect('/metodebayar')->with(['success' => 'Data Berhasil Di Simpan!!']);
         }
         } catch (\Exception $e) {
             if($e->getCode()==23000){
@@ -67,7 +68,7 @@ class PembayaranController extends Controller
         $pesanan_id          = $request->pesanan_id;
         $metode_bayar        = $request->metode_bayar;
         $total_bayar         = $request->total_bayar;
-        $status_bayar        = $request->status_bayar;
+        $status_bayar        = 0;
 
         $bayar = DB::table('tb_pembayaran')->where('pembayaran_id', $pembayaran_id)->first();
         $old_bukti_bayar = $bayar->bukti_bayar;
@@ -127,5 +128,16 @@ class PembayaranController extends Controller
         }else{
             return Redirect::back()->with(['error' => 'Data Gagal Di Delete!!']);
         }
+    }
+
+    public function bayar($no_antrian){
+        $bayar = DB::table('tb_pesanan')
+        ->leftJoin('tb_jenis', 'tb_pesanan.jenis_id', '=', 'tb_jenis.jenis_id')
+        ->where('no_antrian', $no_antrian)->first();
+        $harga = $bayar->harga;
+        $jumlah = $bayar->jumlah;
+        $total = $jumlah * $harga;
+
+        return view('pesanan.bayar', compact('bayar', 'total'));
     }
 }

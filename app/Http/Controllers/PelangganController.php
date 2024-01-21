@@ -158,4 +158,9 @@ class PelangganController extends Controller
         }
     }
 
+    public function pesan()
+    {
+        $jenis = DB::table('tb_jenis')->get();
+        return view('pesanan.pesan', compact('jenis'));
+    }
 }

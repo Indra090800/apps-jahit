@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -19,18 +20,18 @@ class PesananController extends Controller
             $query->where('no_antrian', 'like', '%'. $request->no_antrian.'%');
         }
         $pesanan = $query->paginate(25);
-        
+
         return view('master.pesanan', compact('pesanan'));
     }
 
     public function addPesanan(Request $request)
     {
-        $pelanggan_id       = $request->pelanggan_id;
+        $pelanggan_id       = Auth::guard('buy')->user()->pelanggan_id;
         $jenis_id           = $request->jenis_id;
         $jumlah             = $request->jumlah;
         $bahan              = $request->bahan;
-        $status_pesanan     = $request->status_pesanan;
-        $no_antrian         = $request->no_antrian;
+        $status_pesanan     = 0;
+        $no_antrian         = date('dmYhis').'-'.$pelanggan_id;
         $tgl_pemesanan      = $request->tgl_pemesanan;
         $tgl_kirim          = $request->tgl_kirim;
 
@@ -47,7 +48,7 @@ class PesananController extends Controller
             ];
             $simpan = DB::table('tb_pesanan')->insert($data);
         if($simpan){
-            return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!!']);
+            return Redirect('/metodebayar/'.$no_antrian)->with(['success' => 'Data Berhasil Di Simpan!!, Silahkan Lanjutkan Metode Pembayaran']);
         }
         } catch (\Exception $e) {
             if($e->getCode()==23000){
