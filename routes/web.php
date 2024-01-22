@@ -51,11 +51,14 @@ Route::middleware(['auth:buy'])->group(function(){
     Route::post('/pesanan/{pesanan_id}/edit', [PesananController::class, 'editPesanan']);
     Route::post('/pesanan/{pesanan_id}/delete', [PesananController::class, 'delete']);
 
+    //metode
     Route::get('/metodebayar', [PembayaranController::class, 'metodebayar']);
     Route::get('/metodebayar/{no_antrian}', [PembayaranController::class, 'bayar']);
     Route::post('/addPembayaran', [PembayaranController::class, 'addPembayaran']);
     Route::post('/pembayaran/{pembayaran_id}/edit', [PembayaranController::class, 'editPembayaran']);
     Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
+    //cetak
+    Route::get('/cetak', [PembayaranController::class, 'metodebayar']);
 });
 
 Route::middleware(['auth:user'])->group(function(){

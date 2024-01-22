@@ -131,7 +131,9 @@ class PembayaranController extends Controller
         $id     = Auth::guard('buy')->user()->pelanggan_id;
         $metode = DB::table('tb_pembayaran')
         ->leftJoin('tb_pesanan', 'tb_pembayaran.pesanan_id', '=', 'tb_pesanan.pesanan_id')
-        ->where('tb_pembayaran.pelanggan_id', $id)->get();
+        ->where('tb_pembayaran.pelanggan_id', $id)
+        ->where('status_bayar', 0)
+        ->get();
 
         return view('pesanan.metodebayar', compact('metode'));
     }

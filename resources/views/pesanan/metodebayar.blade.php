@@ -1,7 +1,7 @@
 @extends('layout.presensi');
 @section('header')
 
-    <div class="appHeader bg-danger text-light">
+    <div class="appHeader bg-success text-light">
         <div class="left">
             <a href="javascript:;" class="headerButton goBacc">
                 <ion-icon name="chevron-bacc-outline"></ion-icon>
@@ -50,7 +50,7 @@
                         <div class="col-5"></div>
                         <div class="col-5"></div>
                         <div class="col-2">
-                            <button class="btn btn-danger w-100">Cetak Struk</button>
+                            <a href="/cetak" class="btn btn-danger w-100">Cetak Struk</a>
                         </div>
                     </div>
                 </div>
@@ -68,9 +68,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                                 $total = 0;
-                                $bayar = 0;    
+                                $bayar = 0;
                             ?>
                             @foreach ($metode as $k)
                                 <?php
@@ -90,7 +90,7 @@
                                         <img src="{{ url($path) }}" width="50px" class="avatar" alt="">
                                         @endif
                                     </td>
-                                    <td class="text-center">{{ $k->total_bayar }}</td>
+                                    <td class="text-center">{{ currency_IDR($k->total_bayar) }}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
                                         <form action="/pembayaran/{{ $k->pembayaran_id }}/delete" method="POST" style="margin-left: 5px;">
@@ -113,7 +113,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="5"></td>
-                                <td>{{ $total }}</td>
+                                <td class="text-center">{{ currency_IDR($total) }}</td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -125,7 +125,7 @@
 </div>
 
 <div class="fab-button animate bottom-right dropdown" style="margin-bottom: 70px;">
-    <a href="/jahit/pesan" class="fab bg-danger" >
+    <a href="/jahit/pesan" class="fab bg-success" >
         <ion-icon name="add-outline" role="img" class="md hydrated"></ion-icon>
     </a>
 </div>
@@ -186,7 +186,21 @@
 
 <script>
     $(function(){
-
+        $(".btnEdit").click(function(e){
+                var form = $(this).closest('form');
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Apakah yakin ingin menghapus?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus',
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    form.submit();
+                    Swal.fire('Data Berhasil Di Hapus !!!', '', 'success')
+                }
+                })
+        });
         $("#frmmetode").submit(function(){
             var metode_bayar = $("#metode_bayar").val();
                 var bukti_bayar = $("#fileuploadInput").val();
