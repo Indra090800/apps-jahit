@@ -33,7 +33,7 @@ class PembayaranController extends Controller
         $id                  = Auth::guard('buy')->user()->pelanggan_id;
 
         if($request->hasFile('bukti_bayar')){
-            $bukti_bayar = $pesanan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
+            $bukti_bayar = $id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
         }else{
             $bukti_bayar = null;
         }
@@ -47,7 +47,6 @@ class PembayaranController extends Controller
                 'bukti_bayar'         => $bukti_bayar,
                 'pelanggan_id'        => $id
             ];
-            dd($data);
             $simpan = DB::table('tb_pembayaran')->insert($data);
         if($simpan){
             if($request->hasFile('bukti_bayar')){
@@ -74,7 +73,7 @@ class PembayaranController extends Controller
         $old_bukti_bayar = $bayar->bukti_bayar;
 
         if($request->hasFile('bukti_bayar')){
-            $bukti_bayar = $bayar->pesanan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
+            $bukti_bayar = $bayar->pelanggan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
         }else{
             $bukti_bayar = null;
         }
@@ -82,6 +81,7 @@ class PembayaranController extends Controller
         try {
             $data = [
                 'metode_bayar'        => $metode_bayar,
+                'bukti_bayar'         => $bukti_bayar,
             ];
             $update = DB::table('tb_pembayaran')->where('pembayaran_id', $pembayaran_id)->update($data);
         if($update){
@@ -129,7 +129,9 @@ class PembayaranController extends Controller
     public function metodebayar()
     {
         $id     = Auth::guard('buy')->user()->pelanggan_id;
-        $metode = DB::table('tb_pembayaran')->where('pelanggan_id', $id)->get();
+        $metode = DB::table('tb_pembayaran')
+        ->leftJoin('tb_pesanan', 'tb_pembayaran.pesanan_id', '=', 'tb_pesanan.pesanan_id')
+        ->where('tb_pembayaran.pelanggan_id', $id)->get();
 
         return view('pesanan.metodebayar', compact('metode'));
     }

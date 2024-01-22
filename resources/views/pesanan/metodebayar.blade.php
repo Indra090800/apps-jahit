@@ -45,6 +45,15 @@
     <div class="col">
         <div class="card mt-2">
             <div class="card-body">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-5"></div>
+                        <div class="col-5"></div>
+                        <div class="col-2">
+                            <button class="btn btn-danger w-100">Cetak Struk</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive" style="overflow-x:auto;">
                     <table class="table table-bordered" style="width:100%">
                         <thead>
@@ -53,29 +62,35 @@
                                 <th class="text-center">No Antrian</th>
                                 <th class="text-center">No Pesanan</th>
                                 <th class="text-center">Metode Bayar</th>
-                                <th class="text-center">Total Bayar</th>
                                 <th class="text-center">Bukti Bayar</th>
+                                <th class="text-center">Total Bayar</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                                $total = 0;
+                                $bayar = 0;    
+                            ?>
                             @foreach ($metode as $k)
-                                @php
+                                <?php
                                     $path = Storage::url('uploads/bukti_bayar/'.$k->bukti_bayar);
-                                @endphp
+                                    $bayar = $k->total_bayar;
+                                    $total += $bayar;
+                                ?>
                                 <tr>
                                     <td width="5px">{{ $loop->iteration }}</td>
                                     <td class="text-center">{{ $k->no_antrian }}</td>
                                     <td class="text-center">{{ $k->pesanan_id }}</td>
                                     <td class="text-center">{{ $k->metode_bayar }}</td>
-                                    <td class="text-center">{{ $k->total_bayar }}</td>
                                     <td class="text-center">
                                         @if (empty($k->bukti_bayar))
-                                        <img src="{{ asset('assets/img/nophoto.png') }}" class="avatar" alt="">
+                                        -
                                         @else
-                                        <img src="{{ url($path) }}" class="avatar" alt="">
+                                        <img src="{{ url($path) }}" width="50px" class="avatar" alt="">
                                         @endif
                                     </td>
+                                    <td class="text-center">{{ $k->total_bayar }}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
                                         <form action="/pembayaran/{{ $k->pembayaran_id }}/delete" method="POST" style="margin-left: 5px;">
@@ -96,6 +111,11 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <td colspan="5"></td>
+                                <td>{{ $total }}</td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -120,7 +140,7 @@
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="/pembayaran/{{ $k->pembayaran_id }}/edit" method="POST" id="frmetode">
+            <form action="/pembayaran/{{ $k->pembayaran_id }}/edit" method="POST" id="frmetode" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
