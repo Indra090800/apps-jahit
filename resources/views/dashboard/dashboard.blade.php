@@ -44,12 +44,12 @@
                                 </a>
                             </div>
                             <div class="menu-name">
-                                <span class="text-center">Metode Bayar</span>
+                                <span class="text-center">Transaksi</span>
                             </div>
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="warning" style="font-size: 40px;">
+                                <a href="/lihatpesanan" class="warning" style="font-size: 40px;">
                                     <ion-icon name="pricetags-outline"></ion-icon>
                                 </a>
                             </div>
@@ -114,7 +114,8 @@
                                     </tr>
                                 @endforeach
                             </table>
-                        </div>
+                        </div><br>
+                        {{ $jenis->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
             </div>

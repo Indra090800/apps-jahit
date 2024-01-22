@@ -41,8 +41,8 @@ class PembayaranController extends Controller
                 'pesanan_id'          => $pesanan_id,
                 'metode_bayar'        => $metode_bayar,
                 'total_bayar'         => $total_bayar,
-                'bukti_bayar'         => $bukti_bayar,
                 'status_bayar'        => $status_bayar,
+                'bukti_bayar'         => $bukti_bayar
             ];
             dd($data);
             $simpan = DB::table('tb_pembayaran')->insert($data);
@@ -51,7 +51,7 @@ class PembayaranController extends Controller
                 $folderPath = "public/uploads/bukti_bayar/";
                 $request->file('bukti_bayar')->storeAs($folderPath, $bukti_bayar);
             }
-            return Redirect('/metodebayar')->with(['success' => 'Data Berhasil Di Simpan!!']);
+            return Redirect('/cetak')->with(['success' => 'Data Berhasil Di Simpan!!']);
         }
         } catch (\Exception $e) {
             if($e->getCode()==23000){

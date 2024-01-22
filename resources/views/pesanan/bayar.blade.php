@@ -26,7 +26,7 @@
 @section('content')
     <div class="row" style="margin-top: 4rem;">
         <div class="col">
-            <form action="/addPembayaran" method="POST" id="frmizin">
+            <form action="/addPembayaran" method="POST" id="frmizin" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <input type="text" class="form-control" value="No Antrian : {{ $bayar->no_antrian }}" readonly>
@@ -43,8 +43,16 @@
                     <label for=""><b>Total Pembayaran</b></label>
                     <input type="text" name="total_bayar" value="{{ $total }}" class="form-control" readonly>
                 </div>
-                <div class="form-group">
-                    <input type="file" name="bukti_bayar" id="bukti_bayar" class="form-control">
+                <div class="custom-file-upload" id="fileUpload1">
+                    <input type="file" name="bukti_bayar" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                    <label for="fileuploadInput">
+                        <span>
+                            <strong>
+                                <ion-icon name="cloud-upload-outline" role="img" class="md hydrated" aria-label="cloud upload outline"></ion-icon>
+                                <i>Tap to Upload</i>
+                            </strong>
+                        </span>
+                    </label>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary w-100">Kirim</button>
@@ -63,7 +71,7 @@
 
             $("#frmizin").submit(function() {
                 var metode_bayar = $("#metode_bayar").val();
-                var bukti_bayar = $("#bukti_bayar").val();
+                var bukti_bayar = $("#fileuploadInput").val();
 
                 if(metode_bayar == "Transfer Bank" && bukti_bayar == ""){
                     Swal.fire({
