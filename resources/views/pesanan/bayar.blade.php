@@ -64,7 +64,6 @@
 
 @push('myscript')
     <script>
-        var currYear = (new Date()).getFullYear();
 
         $(document).ready(function() {
 

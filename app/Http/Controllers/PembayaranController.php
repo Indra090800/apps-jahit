@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +30,7 @@ class PembayaranController extends Controller
         $metode_bayar        = $request->metode_bayar;
         $total_bayar         = $request->total_bayar;
         $status_bayar        = 0;
+        $id                  = Auth::guard('buy')->user()->pelanggan_id;
 
         if($request->hasFile('bukti_bayar')){
             $bukti_bayar = $pesanan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
@@ -42,7 +44,8 @@ class PembayaranController extends Controller
                 'metode_bayar'        => $metode_bayar,
                 'total_bayar'         => $total_bayar,
                 'status_bayar'        => $status_bayar,
-                'bukti_bayar'         => $bukti_bayar
+                'bukti_bayar'         => $bukti_bayar,
+                'pelanggan_id'        => $id
             ];
             dd($data);
             $simpan = DB::table('tb_pembayaran')->insert($data);
@@ -51,7 +54,7 @@ class PembayaranController extends Controller
                 $folderPath = "public/uploads/bukti_bayar/";
                 $request->file('bukti_bayar')->storeAs($folderPath, $bukti_bayar);
             }
-            return Redirect('/cetak')->with(['success' => 'Data Berhasil Di Simpan!!']);
+            return Redirect('/metodebayar')->with(['success' => 'Data Berhasil Di Simpan!!']);
         }
         } catch (\Exception $e) {
             if($e->getCode()==23000){
@@ -65,27 +68,20 @@ class PembayaranController extends Controller
 
     public function editPembayaran($pembayaran_id, Request $request)
     {
-        $pesanan_id          = $request->pesanan_id;
         $metode_bayar        = $request->metode_bayar;
-        $total_bayar         = $request->total_bayar;
-        $status_bayar        = 0;
 
         $bayar = DB::table('tb_pembayaran')->where('pembayaran_id', $pembayaran_id)->first();
         $old_bukti_bayar = $bayar->bukti_bayar;
 
         if($request->hasFile('bukti_bayar')){
-            $bukti_bayar = $pesanan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
+            $bukti_bayar = $bayar->pesanan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
         }else{
             $bukti_bayar = null;
         }
 
         try {
             $data = [
-                'pesanan_id'          => $pesanan_id,
                 'metode_bayar'        => $metode_bayar,
-                'total_bayar'         => $total_bayar,
-                'bukti_bayar'         => $bukti_bayar,
-                'stastatus_bayartus'  => $status_bayar,
             ];
             $update = DB::table('tb_pembayaran')->where('pembayaran_id', $pembayaran_id)->update($data);
         if($update){
@@ -128,6 +124,14 @@ class PembayaranController extends Controller
         }else{
             return Redirect::back()->with(['error' => 'Data Gagal Di Delete!!']);
         }
+    }
+
+    public function metodebayar()
+    {
+        $id     = Auth::guard('buy')->user()->pelanggan_id;
+        $metode = DB::table('tb_pembayaran')->where('pelanggan_id', $id)->get();
+
+        return view('pesanan.metodebayar', compact('metode'));
     }
 
     public function bayar($no_antrian){
