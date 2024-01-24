@@ -16,7 +16,7 @@ class DashboardController extends Controller
         if(!empty($request->jenis_jahitan)){
             $query->where('jenis_jahitan', 'like', '%'. $request->jenis_jahitan.'%');
         }
-        $jenis = $query->paginate(5);
+        $jenis = $query->paginate(25);
         $pelid = Auth::guard('buy')->user()->pelanggan_id;
         $mypes = DB::table('tb_pesanan')
         ->leftJoin('tb_pelanggan', 'tb_pesanan.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id')
