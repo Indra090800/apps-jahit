@@ -12,10 +12,10 @@
                 </div>
             </div>
         </a>
-        <a href="/jahit/addbukti" class="item {{ request()->is('sispilu/voters/add') ? 'active' : '' }}">
+        <a href="/addrate" class="item {{ request()->is('addrate') ? 'active' : '' }}">
             <div class="col">
-                <ion-icon name="people-outline" role="img" class="md hydrated" aria-label="people outline"></ion-icon>
-                <strong>Add Bukti</strong>
+                <ion-icon name="star-half-outline"></ion-icon>
+                <strong>Rate</strong>
             </div>
         </a>
     </div>

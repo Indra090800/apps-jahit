@@ -15,7 +15,7 @@ class PembayaranController extends Controller
     {
         $query = Pembayaran::query();
         $query->select('tb_pembayaran.*');
-        $query->orderBy('status');
+        $query->orderBy('status_bayar');
         if(!empty($request->pesanan_id)){
             $query->where('pesanan_id', 'like', '%'. $request->pesanan_id.'%');
         }

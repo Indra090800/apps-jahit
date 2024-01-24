@@ -57,8 +57,10 @@ Route::middleware(['auth:buy'])->group(function(){
     Route::post('/addPembayaran', [PembayaranController::class, 'addPembayaran']);
     Route::post('/pembayaran/{pembayaran_id}/edit', [PembayaranController::class, 'editPembayaran']);
     Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
-    //lihat pesanan
-    
+    // pesanan
+    Route::get('/lihatpesanan', [PesananController::class, 'lihatpesanan']);
+    Route::get('/editpesan/{pesanan_id}', [PesananController::class, 'editpesan']);
+    Route::post('/pesanan/{pesanan_id}/deleteS', [PesananController::class, 'deleteS']);
     //cetak
     Route::get('/cetak', [PembayaranController::class, 'cetak']);
 });

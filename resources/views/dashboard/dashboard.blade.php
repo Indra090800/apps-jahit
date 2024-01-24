@@ -59,12 +59,12 @@
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="orange" style="font-size: 40px;">
-                                    <ion-icon name="location"></ion-icon>
+                                <a href="/lihatrate" class="orange" style="font-size: 40px;">
+                                    <ion-icon name="star-half-outline"></ion-icon>
                                 </a>
                             </div>
                             <div class="menu-name">
-                                Lokasi
+                                My rate
                             </div>
                         </div>
                         <div class="item-menu text-center">

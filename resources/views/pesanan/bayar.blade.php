@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <select name="metode_bayar" id="metode_bayar" class="form-control" required>
                         <option value="">Pilih Metode Bayar</option>
-                        <option value="Transfer Bank">Transfer Bank</option>
+                        <option value="Transfer Bank">Transfer Bank - BRI 402801010849535 an. Dewi Septiani</option>
                         <option value="Cash Di Tempat">Cash Di Tempat</option>
                     </select>
                 </div>

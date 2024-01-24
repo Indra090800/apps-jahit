@@ -96,10 +96,10 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
-                                                        @if ($k->status == 1)
-                                                            <span class="bg bg-success">Verified</span>
+                                                        @if ($k->status_bayar == 0)
+                                                            <button class="btn btn-danger btn-sm">Not Verified</button>
                                                         @else
-                                                            <span class="bg bg-warning">Not Verified</span>
+                                                            <button class="btn btn-success btn-sm"> Verified</button>
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
