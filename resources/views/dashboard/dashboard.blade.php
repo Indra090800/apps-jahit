@@ -6,14 +6,14 @@
             <div id="user-detail">
                 <div class="avatar">
 
-                    <!-- @if (!empty(Auth::guard()->user()->foto_pelanggan))
+                    @if (!empty(Auth::guard()->user()->foto_pelanggan))
                     @php
-                        $path = Storage::url('public/uploads/saksi/'.Auth::guard('buy')->user()->foto_pelanggan);
+                        $path = Storage::url('public/uploads/pelanggan/'.Auth::guard('buy')->user()->foto_pelanggan);
                     @endphp
                     <img src="{{ url($path) }}" alt="avatar" class="imaged w64 rounded" style="height: 60px;">
-                    @else -->
+                    @else
                     <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
-                    <!-- @endif -->
+                    @endif 
 
                 </div>
                 <div id="user-info">
@@ -131,7 +131,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
-                                Leaderboard
+                                Lainnya
                             </a>
                         </li>
                     </ul>
@@ -139,49 +139,57 @@
                 <div class="tab-content mt-2" style="margin-bottom:100px;">
                     <div class="tab-pane fade show active" id="home" role="tabpanel">
                         <ul class="listview image-listview">
-
-
-                            <li>
-                                <div class="item">
-                                    <div class="icon-box bg-primary">
-                                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w32 rounded">
+                            @foreach ($mypes as $p)
+                                <li>
+                                    <div class="item">
+                                        <div class="icon-box bg-primary">
+                                            @if (!empty(Auth::guard()->user()->foto_pelanggan))
+                                            @php
+                                                $path = Storage::url('public/uploads/pelanggan/'.Auth::guard('buy')->user()->foto_pelanggan);
+                                            @endphp
+                                            <img src="{{ url($path) }}" alt="avatar" class="imaged w32 rounded" width="30px" height="30px">
+                                            @else
+                                            <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
+                                            @endif 
+                                        </div>
+                                        <div class="in">
+                                            <div>{{ $p->nama_pelanggan }}</div>
+                                            <span class="badge badge-warning">{{ $p->jenis_jahitan }}</span>
+                                            <span class="badge badge-danger">{{ $p->status_pesanan == 0 ? 'Not Verified' : ''}}</span>
+                                        </div>
                                     </div>
-                                    <div class="in">
-                                        <div>Dewi</div>
-                                        <span class="badge badge-warning">Kemeja</span>
-                                        <span class="badge badge-success">Done</span>
-                                    </div>
-                                </div>
-                            </li>
-
-
+                                </li>
+                            @endforeach
                         </ul>
-                        <style>
-                            .historycontent{
-                                display: flex;
-                            }
-                            .datapresensi{
-                                margin-left: 10px
-                            }
-                        </style>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel">
                         <ul class="listview image-listview">
 
-                            {{-- @foreach ($leaderboard as $l)
-                            <li>
-                                <div class="item">
-                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                                    <div class="in">
-                                        <div>
-                                            <b>{{ $l->nama_lengkap }}</b><br>
-                                            <small class="text-muted">{{ $l->jabatan }}</small>
+                            @foreach ($pes as $p)
+                                <li>
+                                    <div class="item">
+                                        <div class="icon-box bg-primary">
+                                            @if (!empty(Auth::guard()->user()->foto_pelanggan))
+                                            @php
+                                                $path = Storage::url('public/uploads/pelanggan/'.Auth::guard('buy')->user()->foto_pelanggan);
+                                            @endphp
+                                            <img src="{{ url($path) }}" alt="avatar" class="imaged w32 rounded" width="30px" height="30px">
+                                            @else
+                                            <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
+                                            @endif 
                                         </div>
-                                        <span class="badge {{ $l->jam_in < "07:00" ? "bg-success" : "bg-danger"}}">{{ $l->jam_in }}</span>
+                                        <div class="in">
+                                            <div>{{ $p->nama_pelanggan }}</div>
+                                            <span class="badge badge-warning">{{ $p->jenis_jahitan }}</span>
+                                            @if ($p->status_pesanan == 0)
+                                            <span class="badge badge-danger">Not Verified</span>
+                                            @else
+                                            <span class="badge badge-success"> Verified</span>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            @endforeach --}}
+                                </li>
+                            @endforeach
 
                         </ul>
                     </div>

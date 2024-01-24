@@ -215,22 +215,6 @@
                 }
         });
 
-        $("#frmetode").submit(function(){
-            var nama_metode = $("#frmetode").find("#nama_metode").val();
-
-            if(nama_metode==""){
-                Swal.fire({
-                title: 'Warning!',
-                text: 'Nama metode Harus Diisi !!',
-                icon: 'warning',
-                confirmButtonText: 'OK'
-                }).then((result) => {
-                    $("#nama_metode").focus();
-                });
-
-                return false;
-            }
-        });
     });
 
 
