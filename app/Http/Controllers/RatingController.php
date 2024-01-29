@@ -41,7 +41,7 @@ class RatingController extends Controller
             ];
             $simpan = DB::table('tb_rating')->insert($data);
         if($simpan){
-            return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!!']);
+            return Redirect('/myrate')->with(['success' => 'Data Berhasil Di Simpan!!']);
         }
         } catch (\Exception $e) {
             if($e->getCode()==23000){
@@ -49,7 +49,7 @@ class RatingController extends Controller
             }else {
                 $message = "Hubungi Tim IT";
             }
-            return Redirect::back()->with(['error' => 'Data Gagal Di Simpan!! '. $message]);
+            return Redirect('/myrate')->with(['error' => 'Data Gagal Di Simpan!! '. $message]);
         }
     }
 

@@ -50,7 +50,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">No</th>
-                                <th class="text-center">Id Pesanan</th>
+                                <th class="text-center">No Antrian</th>
                                 <th class="text-center">Penilaian</th>
                                 <th class="text-center">Komentar</th>
                                 <th class="text-center">Status</th>
@@ -95,7 +95,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                        <form action="/rating/{{ $k->rating_id }}/delete" method="POST" style="margin-left: 5px;">
+                                        <form action="/rating/{{ $k->rating_id }}/deleteS" method="POST" style="margin-left: 5px;">
                                             @csrf
                                             <a class="btn btn-danger btn-sm btnEdit">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eraser" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -103,15 +103,6 @@
                                             <path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3"></path>
                                             <path d="M18 13.3l-6.3 -6.3"></path>
                                             </svg>
-                                            </a>
-                                            <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editrating{{ $k->rating_id }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                                <path d="M16 5l3 3"></path>
-                                                </svg>
-                                            </a>
                                         </form>
                                         </div>
                                     </td>
