@@ -61,6 +61,13 @@ Route::middleware(['auth:buy'])->group(function(){
     Route::get('/lihatpesanan', [PesananController::class, 'lihatpesanan']);
     Route::get('/editpesan/{pesanan_id}', [PesananController::class, 'editpesan']);
     Route::post('/pesanan/{pesanan_id}/deleteS', [PesananController::class, 'deleteS']);
+    //rate
+    Route::get('/addrate', [RatingController::class, 'addrate']);
+    //myrate
+    Route::get('/myrate', [RatingController::class, 'myrate']);
+    Route::post('/addRating', [RatingController::class, 'addRating']);
+    Route::post('/rating/{rating_id}/edit', [RatingController::class, 'editRating']);
+    Route::post('/rating/{rating_id}/deleteS', [RatingController::class, 'deleteS']);
     //cetak
     Route::get('/cetak', [PembayaranController::class, 'cetak']);
 });
@@ -89,8 +96,6 @@ Route::middleware(['auth:user'])->group(function(){
 
     //Rating
     Route::get('/master/rating', [RatingController::class, 'index']);
-    Route::post('/addRating', [RatingController::class, 'addRating']);
-    Route::post('/rating/{rating_id}/edit', [RatingController::class, 'editRating']);
     Route::post('/rating/{rating_id}/delete', [RatingController::class, 'delete']);
 
     Route::post('/rating/{rating_id}/editSRating', [RatingController::class, 'editSRating']);

@@ -12,7 +12,7 @@
                 </div>
             </div>
         </a>
-        <a href="/addrate" class="item {{ request()->is('addrate') ? 'active' : '' }}">
+        <a href="/myrate" class="item {{ request()->is('addrate') ? 'active' : '' }}">
             <div class="col">
                 <ion-icon name="star-half-outline"></ion-icon>
                 <strong>Rate</strong>
