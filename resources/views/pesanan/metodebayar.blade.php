@@ -93,11 +93,8 @@
                                     <td class="text-center">{{ currency_IDR($k->total_bayar) }}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                        <form action="/pembayaran/{{ $k->pembayaran_id }}/delete" method="POST" style="margin-left: 5px;">
+                                        <form action="/pembayaran/{{ $k->pembayaran_id }}/deleteS" method="POST" style="margin-left: 5px;">
                                             @csrf
-                                            <a class="btn btn-danger btn-sm btnEdit">
-                                                <ion-icon name="trash-outline"></ion-icon>
-                                            </a>
                                             <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editmetode{{ $k->pembayaran_id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

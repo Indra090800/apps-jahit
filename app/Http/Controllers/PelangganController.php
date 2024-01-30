@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -162,5 +163,12 @@ class PelangganController extends Controller
     {
         $jenis = DB::table('tb_jenis')->get();
         return view('pesanan.pesan', compact('jenis'));
+    }
+
+    public function editprofile()
+    {
+        $user = DB::table('tb_pelanggan')->where('pelanggan_id', Auth::guard('buy')->user()->pelanggan_id)->first();
+
+        return view('pesanan.editprofile', compact('user'));
     }
 }

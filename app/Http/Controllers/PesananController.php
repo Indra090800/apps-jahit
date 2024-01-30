@@ -89,7 +89,7 @@ class PesananController extends Controller
             ]);
             $update = DB::table('tb_pesanan')->where('pesanan_id', $pesanan_id)->update($data);
         if($update){
-            return Redirect('/lihatpesanan')->with(['success' => 'Data Berhasil Di Update!!']);
+            return Redirect('/editmetode/'.$pesanan_id)->with(['success' => 'Data Berhasil Di Update!! Silahkan Lanjutkan Pembayaran Ulang']);
         }
         } catch (\Exception $e) {
             return Redirect('/lihatpesanan')->with(['error' => 'Data Gagal Di Update!!']);

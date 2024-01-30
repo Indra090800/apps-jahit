@@ -98,6 +98,45 @@ class PembayaranController extends Controller
         }
     }
 
+    public function editPembayaranS($pesanan_id, Request $request)
+    {
+        $metode_bayar        = $request->metode_bayar;
+        $total_bayar         = $request->total_bayar;
+        $status_bayar        = 0;
+        $id                  = Auth::guard('buy')->user()->pelanggan_id;
+
+        if($request->hasFile('bukti_bayar')){
+            $bukti_bayar = $id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
+        }else{
+            $bukti_bayar = null;
+        }
+
+        try {
+            $data = [
+                'metode_bayar'        => $metode_bayar,
+                'total_bayar'         => $total_bayar,
+                'status_bayar'        => $status_bayar,
+                'bukti_bayar'         => $bukti_bayar,
+                'pelanggan_id'        => $id
+            ];
+            $simpan = DB::table('tb_pembayaran')->where('pesanan_id', $pesanan_id)->update($data);
+        if($simpan){
+            if($request->hasFile('bukti_bayar')){
+                $folderPath = "public/uploads/bukti_bayar/";
+                $request->file('bukti_bayar')->storeAs($folderPath, $bukti_bayar);
+            }
+            return Redirect('/metodebayar')->with(['success' => 'Data Berhasil Di Simpan!!']);
+        }
+        } catch (\Exception $e) {
+            if($e->getCode()==23000){
+                $message = "Data Sudah Ada!!";
+            }else {
+                $message = "Hubungi Tim IT";
+            }
+            return Redirect::back()->with(['error' => 'Data Gagal Di Simpan!! '. $message]);
+        }
+    }
+
     public function editSPembayaran($pembayaran_id, Request $request)
     {
         $status_bayar           = $request->status_bayar;
@@ -126,6 +165,17 @@ class PembayaranController extends Controller
         }
     }
 
+    public function deleteS($pembayaran_id)
+    {
+        $delete =  DB::table('tb_pembayaran')->where('pembayaran_id', $pembayaran_id)->delete();
+
+        if($delete){
+            return Redirect::back()->with(['success' => 'Data Berhasil Di Delete!!']);
+        }else{
+            return Redirect::back()->with(['error' => 'Data Gagal Di Delete!!']);
+        }
+    }
+
     public function metodebayar()
     {
         $id     = Auth::guard('buy')->user()->pelanggan_id;
@@ -136,6 +186,17 @@ class PembayaranController extends Controller
         ->get();
 
         return view('pesanan.metodebayar', compact('metode'));
+    }
+
+    public function editmetode($pesanan_id)
+    {
+        $id     = Auth::guard('buy')->user()->pelanggan_id;
+        $metode = DB::table('tb_pembayaran')
+        ->leftJoin('tb_pesanan', 'tb_pembayaran.pesanan_id', '=', 'tb_pesanan.pesanan_id')
+        ->where('tb_pembayaran.pesanan_id', $pesanan_id)
+        ->first();
+
+        return view('pesanan.editmetode', compact('metode'));
     }
 
     public function bayar($no_antrian){

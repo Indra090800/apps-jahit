@@ -64,7 +64,7 @@
                                 </a>
                             </div>
                             <div class="menu-name">
-                                My rate
+                                Rate ALL
                             </div>
                         </div>
                         <div class="item-menu text-center">

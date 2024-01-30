@@ -133,4 +133,23 @@ class RatingController extends Controller
         ->get();
         return view('pesanan.addrate', compact('rate'));
     }
+
+    public function lihatrate(Request $request)
+    {
+        $query = Rating::query();
+        $query->selectRaw('COUNT(rating_id) as jmlrate');
+        if(!empty($request->penilaian)){
+            $query->where('penilaian', 'like', '%'. $request->penilaian.'%');
+        }
+        $rating = $query->first();
+        $query = Rating::query();
+        $query->select('tb_rating.*','nama_pelanggan');
+        $query->leftJoin('tb_pesanan', 'tb_rating.pesanan_id', '=', 'tb_pesanan.pesanan_id');
+        $query->leftJoin('tb_pelanggan', 'tb_rating.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id');
+        if(!empty($request->penilaian)){
+            $query->where('penilaian', 'like', '%'. $request->penilaian.'%');
+        }
+        $my = $query->get();
+        return view('pesanan.lihatrate',compact('my', 'rating'));
+    }
 }

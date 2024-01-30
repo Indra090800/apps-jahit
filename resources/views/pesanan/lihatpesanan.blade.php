@@ -83,16 +83,23 @@
                                     </td>
                                     <td class="text-center">
                                         @if (empty($bayar->bukti_bayar))
-                                        -
+                                        COD
                                         @else
                                         <img src="{{ url($path) }}" width="50px" class="avatar" alt="">
                                         @endif
                                     </td>
                                     <td class="text-center">{{ $k->tgl_pemesanan }}</td>
-                                    <td class="text-center">{{ $k->tgl_kirim == null ? 'on progress' : $k->tgl_kirim }}</td>
+                                    <td class="text-center">
+                                        @if ($k->tgl_kirim == null)
+                                            <button class="btn btn-danger btn-sm">on progress</button>
+                                        @else
+                                            <button class="btn btn-success btn-sm">{{ $k->tgl_kirim }}</button>
+                                        @endif
                                     <td class="text-center">{{ currency_IDR($bayar->total_bayar) }}</td>
                                     <td class="text-center">
-                                        @if ($k->status_pesanan == 1)
+                                        @if ($k->status_pesanan == 0 && !empty($bayar->bukti_bayar))
+                                            <button class="btn btn-danger btn-sm">No Access</button>
+                                        @elseif ($k->status_pesanan == 1)
                                             <button class="btn btn-danger btn-sm">No Access</button>
                                         @else
                                             <div class="btn-group">
