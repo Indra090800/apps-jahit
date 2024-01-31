@@ -66,10 +66,10 @@ class PelangganController extends Controller
         $user   = $request->username;
         $pass   = Hash::make('12345');
 
-        if($request->hasFile('foto_pelanggan')){
-            $foto_pelanggan = $user.".".$request->file('foto_pelanggan')->getClientOriginalExtension();
+        if($request->hasFile('foto_pelanggan_pelanggan')){
+            $foto_pelanggan_pelanggan = $user.".".$request->file('foto_pelanggan_pelanggan')->getClientOriginalExtension();
         }else{
-            $foto_pelanggan = null;
+            $foto_pelanggan_pelanggan = null;
         }
 
         try {
@@ -80,13 +80,13 @@ class PelangganController extends Controller
                 'no_hp'          => $nohp,
                 'username'       => $user,
                 'password'       => $pass,
-                'foto_pelanggan' => $foto_pelanggan
+                'foto_pelanggan_pelanggan' => $foto_pelanggan_pelanggan
             ];
             $simpan = DB::table('tb_pelanggan')->insert($data);
             if($simpan){
-                if($request->hasFile('foto_pelanggan')){
+                if($request->hasFile('foto_pelanggan_pelanggan')){
                     $folderPath = "public/uploads/pelanggan/";
-                    $request->file('foto_pelanggan')->storeAs($folderPath, $foto_pelanggan);
+                    $request->file('foto_pelanggan_pelanggan')->storeAs($folderPath, $foto_pelanggan_pelanggan);
                 }
                 return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!!']);
             }
@@ -111,12 +111,12 @@ class PelangganController extends Controller
         $pass   = Hash::make('12345');
 
         $pelanggan = DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->first();
-        $old_foto_pelanggan = $pelanggan->foto_pelanggan;
+        $old_foto_pelanggan_pelanggan = $pelanggan->foto_pelanggan_pelanggan;
 
-        if($request->hasFile('foto_pelanggan')){
-            $foto_pelanggan = $user.".".$request->file('foto_pelanggan')->getClientOriginalExtension();
+        if($request->hasFile('foto_pelanggan_pelanggan')){
+            $foto_pelanggan_pelanggan = $user.".".$request->file('foto_pelanggan_pelanggan')->getClientOriginalExtension();
         }else{
-            $foto_pelanggan = $old_foto_pelanggan;
+            $foto_pelanggan_pelanggan = $old_foto_pelanggan_pelanggan;
         }
 
         try {
@@ -127,15 +127,15 @@ class PelangganController extends Controller
                 'no_hp'          => $nohp,
                 'username'       => $user,
                 'password'       => $pass,
-                'foto_pelanggan' => $foto_pelanggan
+                'foto_pelanggan_pelanggan' => $foto_pelanggan_pelanggan
             ];
             $update = DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->update($data);
             if($update){
-                if($request->hasFile('foto_pelanggan')){
+                if($request->hasFile('foto_pelanggan_pelanggan')){
                     $folderPath = "public/uploads/pelanggan/";
-                    $folderPathOld = "public/uploads/pelanggan/".$old_foto_pelanggan;
+                    $folderPathOld = "public/uploads/pelanggan/".$old_foto_pelanggan_pelanggan;
                     Storage::delete($folderPathOld);
-                    $request->file('foto_pelanggan')->storeAs($folderPath, $foto_pelanggan);
+                    $request->file('foto_pelanggan_pelanggan')->storeAs($folderPath, $foto_pelanggan_pelanggan);
                 }
                 return Redirect::back()->with(['success' => 'Data Berhasil Di Update!!']);
             }
@@ -147,8 +147,8 @@ class PelangganController extends Controller
     public function delete($pelanggan_id)
     {
         $pelanggan = DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->first();
-        $old_foto_pelanggan = $pelanggan->foto_pelanggan;
-        $folderPathOld = "public/uploads/pelanggan/".$old_foto_pelanggan;
+        $old_foto_pelanggan_pelanggan = $pelanggan->foto_pelanggan_pelanggan;
+        $folderPathOld = "public/uploads/pelanggan/".$old_foto_pelanggan_pelanggan;
         Storage::delete($folderPathOld);
         $delete =  DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->delete();
 
@@ -170,5 +170,62 @@ class PelangganController extends Controller
         $user = DB::table('tb_pelanggan')->where('pelanggan_id', Auth::guard('buy')->user()->pelanggan_id)->first();
 
         return view('pesanan.editprofile', compact('user'));
+    }
+
+    public function updateprofile(Request $request)
+    {
+        $pelanggan_id = Auth::guard('buy')->user()->pelanggan_id;
+        $nama_pelanggan = $request->nama_pelanggan;
+        $username = $request->username;
+        $email = $request->email;
+        $alamat = $request->alamat;
+        $no_hp = $request->no_hp;
+        $password = Hash::make($request->password);
+
+        $pelanggan = DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->first();
+        $old_foto_pelanggan = $pelanggan->foto_pelanggan;
+
+        $request->validate([
+            'foto_pelanggan' => 'required|image|mimes:png,jpg,jpeg|max:1024',
+        ]);
+
+        if($request->hasFile('foto_pelanggan')){
+            $foto_pelanggan = $pelanggan_id.".".$request->file('foto_pelanggan')->getClientOriginalExtension();
+        }else{
+            $foto_pelanggan = $old_foto_pelanggan;
+        }
+        if(empty($request->password)){
+            $data = [
+                'nama_pelanggan' => $nama_pelanggan,
+                'username'     => $username,
+                'email'        => $email,
+                'alamat'       => $alamat,
+                'no_hp'        => $no_hp,
+                'foto_pelanggan'         => $foto_pelanggan
+            ];
+        }else{
+            $data = [
+                'nama_pelanggan' => $nama_pelanggan,
+                'username'     => $username,
+                'email'        => $email,
+                'alamat'       => $alamat,
+                'no_hp'        => $no_hp,
+                'password'     => $password,
+                'foto_pelanggan'         => $foto_pelanggan
+            ];
+        }
+        
+        $update = DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->update($data);
+        if($update){
+            if($request->hasFile('foto_pelanggan')){
+                $folderPath = "public/uploads/pelanggan/";
+                $folderPathOld = "public/uploads/pelanggan/".$old_foto_pelanggan;
+                Storage::delete($folderPathOld);
+                $request->file('foto_pelanggan')->storeAs($folderPath, $foto_pelanggan);
+            }
+            return Redirect('/editprofile')->with(['success' => 'Data Berhasil Di Update!!']);
+        }else{
+            return Redirect('/editprofile')->with(['error' => 'Data Gagal Di Update!!']);;
+        }
     }
 }

@@ -31,7 +31,7 @@
         </div>
     @endif
 
-    @error('foto')
+    @error('foto_pelanggan')
         <div class="alert alert-outline-error">
             <p>{{ $messageerror }}</p>
         </div>
@@ -43,21 +43,36 @@
     <div class="col">
         <div class="form-group boxed">
             <div class="input-wrapper">
-                <input type="text" class="form-control" value="{{ $user->nama_pelanggan }}" name="nama_pelanggan" placeholder="Nama Lengkap" autocomplete="off">
+                <input type="text" class="form-control" value="{{ $user->nama_pelanggan }}" name="nama_pelanggan" placeholder="Nama Lengkap" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group boxed">
             <div class="input-wrapper">
-                <input type="text" class="form-control" value="{{ $user->no_hp }}" name="no_hp" placeholder="No. HP" autocomplete="off">
+                <input type="text" class="form-control" value="{{ $user->username }}" name="username" placeholder="Username" autocomplete="off" required>
             </div>
         </div>
         <div class="form-group boxed">
             <div class="input-wrapper">
-                <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" required>
+                <input type="text" class="form-control" value="{{ $user->email }}" name="email" placeholder="email" autocomplete="off" required>
+            </div>
+        </div>
+        <div class="form-group boxed">
+            <div class="input-wrapper">
+                <input type="text" class="form-control" value="{{ $user->alamat }}" name="alamat" placeholder="Alamat" autocomplete="off" required>
+            </div>
+        </div>
+        <div class="form-group boxed">
+            <div class="input-wrapper">
+                <input type="text" class="form-control" value="{{ $user->no_hp }}" name="no_hp" placeholder="No. HP" autocomplete="off" required>
+            </div>
+        </div>
+        <div class="form-group boxed">
+            <div class="input-wrapper">
+                <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off">
             </div>
         </div>
         <div class="custom-file-upload" id="fileUpload1">
-            <input type="file" name="foto" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+            <input type="file" name="foto_pelanggan" id="fileuploadInput" accept=".png, .jpg, .jpeg" required>
             <label for="fileuploadInput">
                 <span>
                     <strong>

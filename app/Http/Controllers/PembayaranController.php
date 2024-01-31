@@ -209,4 +209,21 @@ class PembayaranController extends Controller
 
         return view('pesanan.bayar', compact('bayar', 'total'));
     }
+
+    public function cetak(Request $request)
+    {
+        $id     = Auth::guard('buy')->user()->pelanggan_id;
+        $query = Pembayaran::query();
+        $query->select('tb_pembayaran.*', 'tb_pelanggan.*', 'no_antrian');
+        $query->leftJoin('tb_pesanan', 'tb_pembayaran.pesanan_id', '=', 'tb_pesanan.pesanan_id');
+        $query->leftJoin('tb_pelanggan', 'tb_pembayaran.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id');
+        if(!empty($request->metode_bayar)){
+            $query->where('metode_bayar', 'like', '%'. $request->metode_bayar.'%');
+        }
+        $query->where('tb_pembayaran.pelanggan_id', $id);
+        $query->where('status_bayar', 0);
+        $metode = $query->get();
+
+        return view('pesanan.cetak', compact('metode'));
+    }
 }

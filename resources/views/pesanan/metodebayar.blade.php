@@ -47,10 +47,16 @@
             <div class="card-body">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-5"></div>
-                        <div class="col-5"></div>
+                        <div class="col-4"></div>
+                        <div class="col-6"></div>
                         <div class="col-2">
-                            <a href="/cetak" class="btn btn-danger w-100">Cetak Struk</a>
+                            <form action="/cetak" method="get">
+                                <select name="metode_bayar" id="metode_bayar" >
+                                    <option value="Transfer Bank">TF</option>
+                                    <option value="Cash Di Tempat">COD</option>
+                                </select>
+                                <button class="btn btn-danger">Cetak</button>
+                            </form>
                         </div>
                     </div>
                 </div>
