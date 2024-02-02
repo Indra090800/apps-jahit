@@ -74,9 +74,13 @@ Route::middleware(['auth:buy'])->group(function(){
     //cetak
     Route::get('/cetak', [PembayaranController::class, 'cetak']);
 
+    //add desain
+    Route::post('/addDesain/{pesanan_id}', [PesananController::class, 'addDesain']);
+
     //profile
     Route::get('/editprofile', [PelangganController::class, 'editprofile']);
     Route::post('/profile/{pelanggan_id}/updateprofile', [PelangganController::class, 'updateprofile']);
+    
 });
 
 Route::middleware(['auth:user'])->group(function(){
@@ -94,6 +98,7 @@ Route::middleware(['auth:user'])->group(function(){
     Route::post('/addPelanggan', [PelangganController::class, 'addPelanggan']);
     Route::post('/pelanggan/{pelanggan_id}/edit', [PelangganController::class, 'editPelanggan']);
     Route::post('/pelanggan/{pelanggan_id}/delete', [PelangganController::class, 'delete']);
+    Route::get('/lihatpelanggan/{pelanggan_id}', [PelangganController::class, 'lihatpelanggan']);
 
     //pesanan
     Route::get('/master/pesanan', [PesananController::class, 'index']);

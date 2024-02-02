@@ -160,4 +160,31 @@ class PesananController extends Controller
 
         return view('pesanan.editpesan', compact('pesan', 'jenis'));
     }
+
+    public function addDesain($pesanan_id,Request $request)
+    {
+        if($request->hasFile('file_desain')){
+            $file_desain = $pesanan_id.".".$request->file('file_desain')->getClientOriginalExtension();
+        }else{
+            $file_desain = null;
+        }
+
+        try {
+            $data = [
+                'pesanan_id' => $pesanan_id,
+                'file_desain' => $file_desain
+            ];
+            $simpan = DB::table('tb_desain')->insert($data);
+            if($simpan){
+                if($request->hasFile('file_desain')){
+                    $folderPath = "public/uploads/desain/";
+                    $request->file('file_desain')->storeAs($folderPath, $file_desain);
+                }
+                return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!!']);
+            }
+
+        } catch (\Exception $e) {
+            return Redirect::back()->with(['error' => 'Data Gagal Di Simpan!! ']);
+        }
+    }
 }

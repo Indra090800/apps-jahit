@@ -81,10 +81,12 @@ class RatingController extends Controller
     public function editSRating($rating_id, Request $request)
     {
         $status           = $request->status;
+        $pesan            = $request->pesan;
 
         try {
             $data = [
                 'status'             => $status,
+                'pesan'              => $pesan,
             ];
             $update = DB::table('tb_rating')->where('rating_id', $rating_id)->update($data);
         if($update){

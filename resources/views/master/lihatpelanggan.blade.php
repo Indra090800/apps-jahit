@@ -7,7 +7,7 @@
         <div class="col">
         <!-- Page pre-title -->
         <h2 class="page-title">
-            Data Kelola Pesanan
+            Kelola Pesanan {{ $pel->nama_pelanggan }}
         </h2>
         </div>
         <!-- Page title actions -->
@@ -22,22 +22,37 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
+                        <table class="table table-bordered">
+                            <tr>
+                              <td rowspan="5">
+                                  @php
+                                      $path = Storage::url('uploads/pelanggan/'.$pel->foto_pelanggan);
+                                  @endphp
+                                  <img src="{{ url($path) }}" alt="" width="100px" height="150px">
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>Nama Pelanggan</td>
+                              <td>{{ $pel->nama_pelanggan }}</td>
+                          </tr>
+                          <tr>
+                              <td>No HP</td>
+                              <td>{{ $pel->no_hp }}</td>
+                          </tr>
+                          <tr>
+                              <td>Alamat</td>
+                              <td>{{ $pel->alamat }}</td>
+                          </tr>
+                          <tr>
+                              <td>No Hp</td>
+                              <td>{{ $pel->no_hp }}</td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
 
-                            @if (Session::get('success'))
-                                <div class="alert alert-success">
-                                    {{ Session::get('success') }}
-                                </div>
-                            @endif
-
-                            @if (Session::get('error'))
-                                <div class="alert alert-error">
-                                    {{ Session::get('error') }}
-                                </div>
-                            @endif
-                            </div>
-                        </div>
+                <div class="card">
+                    <div class="card-body">
                         <div class="row mt-2">
                             <div class="col-12">
                                 <form action="/master/pesanan" method="GET">
@@ -70,7 +85,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">No</th>
-                                                <th class="text-center">Nama Pelanggan</th>
+                                                <th class="text-center">Desain</th>
                                                 <th class="text-center">Jenis Jahitan</th>
                                                 <th class="text-center">Jumlah</th>
                                                 <th class="text-center">Bahan</th>
@@ -78,14 +93,38 @@
                                                 <th class="text-center">Tanggal Pesan</th>
                                                 <th class="text-center">Tanggal Kirim</th>
                                                 <th class="text-center">Status. Pesanan</th>
+                                                <th class="text-center">Bukti</th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($pesanan as $k)
+                                            <?php
+                                                $bayar = DB::table('tb_pembayaran')->where('pesanan_id', $k->pesanan_id)->first();
+                                                if ($bayar ==null) {
+                                                    $path = null;
+                                                }else {
+                                                    $path = Storage::url('uploads/bukti_bayar/'.$bayar->bukti_bayar);
+                                                }
+                                                
+                                                $desain = DB::table('tb_desain')->where('pesanan_id', $k->pesanan_id)->first();
+                                                if ($desain ==null) {
+                                                    $path1 = null;
+                                                    $file = null;
+                                                }else {
+                                                    $path1 = Storage::url('uploads/desain/'.$desain->file_desain);
+                                                    $file = asset('storage/uploads/desain/'.$desain->file_desain);
+                                                }
+                                            ?>
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration + $pesanan->firstItem()-1 }}</td>
-                                                    <td class="text-center">{{ $k->nama_pelanggan }}</td>
+                                                    <td class="text-center">
+                                                        @if (empty($desain->file_desain))
+                                                        <button class="btn btn-warning btn-sm">Not Design</button>
+                                                        @else
+                                                        <img src="{{ url($path1) }}" width="50px" class="avatar" alt="">
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center">{{ $k->jenis_jahitan }}</td>
                                                     <td class="text-center">{{ $k->jumlah }}</td>
                                                     <td class="text-center">{{ $k->bahan}}</td>
@@ -106,16 +145,14 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
+                                                        @if (empty($bayar->bukti_bayar))
+                                                        COD
+                                                        @else
+                                                        <img src="{{ url($path) }}" width="50px" class="avatar" alt="">
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
                                                         <div class="btn-group">
-                                                        <form action="/pesanan/{{ $k->pesanan_id }}/delete" method="POST" style="margin-left: 5px;">
-                                                            @csrf
-                                                            <a class="btn btn-danger btn-sm btnEdit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eraser" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3"></path>
-                                                            <path d="M18 13.3l-6.3 -6.3"></path>
-                                                            </svg>Hapus
-                                                            </a>
                                                             <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editpesanan{{ $k->pesanan_id }}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -124,7 +161,11 @@
                                                                 <path d="M16 5l3 3"></path>
                                                                 </svg>Set
                                                             </a>
-                                                        </form>
+                                                            @if (empty($desain->file_desain))
+                                                            <button class="btn btn-success btn-sm">Not Design</button>
+                                                            @else
+                                                            <a href="{{ $file }}" class="btn btn-success btn-sm" download>Cetak Desain</a>
+                                                            @endif
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -142,7 +183,6 @@
         </div>
     </div>
 </div>
-
 
 @foreach ($pesanan as $k)
 <div class="modal modal-blur fade" id="editpesanan{{ $k->pesanan_id }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -208,35 +248,4 @@
     </div>
 </div>
 @endforeach
-
 @endsection
-
-@push('myscripct')
-    <script>
-        $(function(){
-
-            $("#btnTambah").click(function(){
-                $("#modal-inputpesanan").modal("show");
-            });
-
-            $(".btnEdit").click(function(e){
-                var form = $(this).closest('form');
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Apakah yakin ingin menghapus?',
-                    showCancelButton: true,
-                    confirmButtonText: 'Hapus',
-                }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    form.submit();
-                    Swal.fire('Data Berhasil Di Hapus !!!', '', 'success')
-                }
-                })
-            });
-
-        });
-
-
-    </script>
-@endpush

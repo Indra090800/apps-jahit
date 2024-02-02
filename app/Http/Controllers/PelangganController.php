@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -227,5 +228,21 @@ class PelangganController extends Controller
         }else{
             return Redirect('/editprofile')->with(['error' => 'Data Gagal Di Update!!']);;
         }
+    }
+
+    public function lihatpelanggan($pelanggan_id, Request $request)
+    {
+        $pel = DB::table('tb_pelanggan')->where('pelanggan_id', $pelanggan_id)->first();
+        $query = Pesanan::query();
+        $query->select('tb_pesanan.*', 'nama_pelanggan', 'jenis_jahitan');
+        $query->join('tb_pelanggan', 'tb_pesanan.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id');
+        $query->join('tb_jenis', 'tb_pesanan.jenis_id', '=', 'tb_jenis.jenis_id');
+        if(!empty($request->no_antrian)){
+            $query->where('no_antrian', 'like', '%'. $request->no_antrian.'%');
+        }
+        $query->where('tb_pesanan.pelanggan_id', $pelanggan_id);
+        $pesanan = $query->paginate(25);
+
+        return view('master.lihatpelanggan', compact('pel', 'pesanan'));
     }
 }
