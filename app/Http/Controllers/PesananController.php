@@ -193,6 +193,19 @@ class PesananController extends Controller
         return view('laporan.harian');
     }
 
+    public function cetakharian(Request $request)
+    {
+        $query = Pesanan::query();
+        $query->select('tb_pesanan.*', 'nama_pelanggan', 'jenis_jahitan');
+        $query->join('tb_pelanggan', 'tb_pesanan.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id');
+        $query->join('tb_jenis', 'tb_pesanan.jenis_id', '=', 'tb_jenis.jenis_id');
+        if(!empty($request->tgl_pemesanan)){
+            $query->where('tgl_pemesanan', 'like', '%'. $request->tgl_pemesanan.'%');
+        }
+        $pesanan = $query->get();
+        return view('laporan.cetakharian', compact('pesanan'));
+    }
+
     public function bulanan()
     {
         $namabulan = ["","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
