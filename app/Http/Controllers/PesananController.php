@@ -70,7 +70,7 @@ class PesananController extends Controller
         $no_antrian         = date('dmYhis').'-'.$pelanggan_id;
         $tgl_pemesanan      = $request->tgl_pemesanan;
         $tgl_kirim          = $request->tgl_kirim;
-        
+
         $harga = DB::table('tb_jenis')->where('jenis_id', $jenis_id)->first();
         $total = $jumlah * $harga->harga;
         try {
@@ -186,5 +186,16 @@ class PesananController extends Controller
         } catch (\Exception $e) {
             return Redirect::back()->with(['error' => 'Data Gagal Di Simpan!! ']);
         }
+    }
+
+    public function harian()
+    {
+        return view('laporan.harian');
+    }
+
+    public function bulanan()
+    {
+        $namabulan = ["","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        return view('laporan.bulanan', compact('namabulan'));
     }
 }

@@ -80,7 +80,7 @@ Route::middleware(['auth:buy'])->group(function(){
     //profile
     Route::get('/editprofile', [PelangganController::class, 'editprofile']);
     Route::post('/profile/{pelanggan_id}/updateprofile', [PelangganController::class, 'updateprofile']);
-    
+
 });
 
 Route::middleware(['auth:user'])->group(function(){
@@ -123,6 +123,14 @@ Route::middleware(['auth:user'])->group(function(){
     Route::post('/addRole', [RoleController::class, 'addRole']);
     Route::post('/role/{id_role}/edit', [RoleController::class, 'editRole']);
     Route::post('/role/{id_role}/delete', [RoleController::class, 'delete']);
+
+    //report
+    //harian
+    Route::get('/laporan/harian', [PesananController::class, 'harian']);
+    Route::get('/laporan/cetakharian', [PesananController::class, 'cetakharian']);
+    //bulan
+    Route::get('/laporan/bulanan', [PesananController::class, 'bulanan']);
+    Route::get('/laporan/cetakbulanan', [PesananController::class, 'cetakbulanan']);
 });
 
 
