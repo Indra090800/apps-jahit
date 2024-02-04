@@ -59,7 +59,7 @@
         <tr>
             <td style="width: 30px;"><img src="{{ asset('assets/img/icon/i.png') }}" width="100px" height="100px" alt=""></td>
             <td><span id="h3">
-                Laporan Harian Tanggal {{ date('d-m-Y') }} <br>
+                Laporan Harian {{ $tgl }} <br>
                 CV. DADE STORE<br>
                 </span>
                 <span><i>Jln. Kapten Jamhur No.365, Dsn. Cimenyan II RT 03/08 Desa Mekarsari Kec. Banjar, Banjar</i></span>
@@ -107,25 +107,25 @@
                     }
                 ?>
                 <tr>
-                    <td class="text-center">{{ $k->no_antrian }}</td>
-                    <td class="text-center">{{ $k->jenis_jahitan }}</td>
-                    <td class="text-center">{{ $k->jumlah }}</td>
-                    <td class="text-center">{{ $k->bahan }}</td>
-                    <td class="text-center">
+                    <td style="text-align: center">{{ $k->no_antrian }}</td>
+                    <td style="text-align: center">{{ $k->jenis_jahitan }}</td>
+                    <td style="text-align: center">{{ $k->jumlah }}</td>
+                    <td style="text-align: center">{{ $k->bahan }}</td>
+                    <td style="text-align: center">
                         @if ($k->status_pesanan == 0)
                             <button class="btn btn-danger btn-sm">Not Verified</button>
                         @else
                             <button class="btn btn-success btn-sm"> Verified</button>
                         @endif
                     </td>
-                    <td class="text-center">{{ $k->tgl_pemesanan }}</td>
-                    <td class="text-center">
+                    <td style="text-align: center">{{ $k->tgl_pemesanan }}</td>
+                    <td style="text-align: center">
                         @if ($k->tgl_kirim == null)
                             <button class="btn btn-danger btn-sm">on progress</button>
                         @else
                             <button class="btn btn-success btn-sm">{{ $k->tgl_kirim }}</button>
                         @endif
-                    <td class="text-center">{{ currency_IDR($bayar->total_bayar) }}</td>
+                    <td style="text-align: center">{{ currency_IDR($bayar->total_bayar) }}</td>
                 </tr>
             @endforeach
             <tr>

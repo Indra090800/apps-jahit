@@ -195,6 +195,7 @@ class PesananController extends Controller
 
     public function cetakharian(Request $request)
     {
+        $tgl = $request->tgl_pemesanan;
         $query = Pesanan::query();
         $query->select('tb_pesanan.*', 'nama_pelanggan', 'jenis_jahitan');
         $query->join('tb_pelanggan', 'tb_pesanan.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id');
@@ -210,7 +211,7 @@ class PesananController extends Controller
             header("Content-Disposition: attachment; filename=Rekap-Laporan-Harian-$time.xls");
             return view('laporan.cetakharian', compact('mypes'));
         }
-        return view('laporan.cetakharian', compact('mypes'));
+        return view('laporan.cetakharian', compact('mypes', 'tgl'));
     }
 
     public function bulanan()
