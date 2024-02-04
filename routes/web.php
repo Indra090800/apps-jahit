@@ -127,10 +127,10 @@ Route::middleware(['auth:user'])->group(function(){
     //report
     //harian
     Route::get('/laporan/harian', [PesananController::class, 'harian']);
-    Route::get('/laporan/cetakharian', [PesananController::class, 'cetakharian']);
+    Route::post('/laporan/cetakharian', [PesananController::class, 'cetakharian']);
     //bulan
     Route::get('/laporan/bulanan', [PesananController::class, 'bulanan']);
-    Route::get('/laporan/cetakbulanan', [PesananController::class, 'cetakbulanan']);
+    Route::post('/laporan/cetakbulanan', [PesananController::class, 'cetakbulanan']);
 });
 
 

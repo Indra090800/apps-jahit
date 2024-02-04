@@ -202,13 +202,42 @@ class PesananController extends Controller
         if(!empty($request->tgl_pemesanan)){
             $query->where('tgl_pemesanan', 'like', '%'. $request->tgl_pemesanan.'%');
         }
-        $pesanan = $query->get();
-        return view('laporan.cetakharian', compact('pesanan'));
+        $mypes = $query->get();
+        if(isset($_POST['excel'])){
+            $time = date("d-M-Y H:i:s");
+
+            header("Content-type: application/vnd-ms-excel");
+            header("Content-Disposition: attachment; filename=Rekap-Laporan-Harian-$time.xls");
+            return view('laporan.cetakharian', compact('mypes'));
+        }
+        return view('laporan.cetakharian', compact('mypes'));
     }
 
     public function bulanan()
     {
         $namabulan = ["","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         return view('laporan.bulanan', compact('namabulan'));
+    }
+
+    public function cetakbulanan(Request $request)
+    {
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $query = Pesanan::query();
+        $query->select('tb_pesanan.*', 'nama_pelanggan', 'jenis_jahitan');
+        $query->join('tb_pelanggan', 'tb_pesanan.pelanggan_id', '=', 'tb_pelanggan.pelanggan_id');
+        $query->join('tb_jenis', 'tb_pesanan.jenis_id', '=', 'tb_jenis.jenis_id');
+        $query->whereRaw('MONTH(tgl_pemesanan)="'.$bulan.'"');
+        $query->whereRaw('YEAR(tgl_pemesanan)="'.$tahun.'"');
+        $mypes = $query->get();
+        if(isset($_POST['excel'])){
+            $time = date("d-M-Y H:i:s");
+
+            header("Content-type: application/vnd-ms-excel");
+            header("Content-Disposition: attachment; filename=Rekap-Laporan-Bulanan-$bulan-$tahun.xls");
+            return view('laporan.cetakbulanan', compact('namabulan', 'bulan', 'tahun','mypes'));
+        }
+        $namabulan = ["","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        return view('laporan.cetakbulanan', compact('namabulan', 'bulan', 'tahun','mypes'));
     }
 }
