@@ -210,7 +210,6 @@ class PesananController extends Controller
 
             header("Content-type: application/vnd-ms-excel");
             header("Content-Disposition: attachment; filename=Rekap-Laporan-Harian-$time.xls");
-            return view('laporan.cetakharian', compact('mypes'));
         }
         return view('laporan.cetakharian', compact('mypes', 'tgl'));
     }
@@ -238,7 +237,6 @@ class PesananController extends Controller
 
             header("Content-type: application/vnd-ms-excel");
             header("Content-Disposition: attachment; filename=Rekap-Laporan-Bulanan-$bulan-$tahun.xls");
-            return view('laporan.cetakbulanan', compact('namabulan', 'bulan', 'tahun','mypes'));
         }
         $namabulan = ["","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         return view('laporan.cetakbulanan', compact('namabulan', 'bulan', 'tahun','mypes'));
