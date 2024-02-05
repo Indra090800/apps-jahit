@@ -203,6 +203,7 @@ class PesananController extends Controller
         if(!empty($request->tgl_pemesanan)){
             $query->where('tgl_pemesanan', 'like', '%'. $request->tgl_pemesanan.'%');
         }
+        $query->where('status_pesanan', 1);
         $mypes = $query->get();
         if(isset($_POST['excel'])){
             $time = date("d-M-Y H:i:s");
@@ -230,6 +231,7 @@ class PesananController extends Controller
         $query->join('tb_jenis', 'tb_pesanan.jenis_id', '=', 'tb_jenis.jenis_id');
         $query->whereRaw('MONTH(tgl_pemesanan)="'.$bulan.'"');
         $query->whereRaw('YEAR(tgl_pemesanan)="'.$tahun.'"');
+        $query->where('status_pesanan', 1);
         $mypes = $query->get();
         if(isset($_POST['excel'])){
             $time = date("d-M-Y H:i:s");
