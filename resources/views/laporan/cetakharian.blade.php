@@ -75,7 +75,6 @@
                 <th class="text-center">Jenis Jahit</th>
                 <th class="text-center">Jumlah</th>
                 <th class="text-center">Bahan</th>
-                <th class="text-center">Status</th>
                 <th class="text-center">Tanggal Pesan</th>
                 <th class="text-center">Tanggal Kirim</th>
                 <th class="text-center">Total Bayar</th>
@@ -111,13 +110,6 @@
                     <td style="text-align: center">{{ $k->jenis_jahitan }}</td>
                     <td style="text-align: center">{{ $k->jumlah }}</td>
                     <td style="text-align: center">{{ $k->bahan }}</td>
-                    <td style="text-align: center">
-                        @if ($k->status_pesanan == 0)
-                            <button class="btn btn-danger btn-sm">Not Verified</button>
-                        @else
-                            <button class="btn btn-success btn-sm"> Verified</button>
-                        @endif
-                    </td>
                     <td style="text-align: center">{{ $k->tgl_pemesanan }}</td>
                     <td style="text-align: center">
                         @if ($k->tgl_kirim == null)
@@ -129,7 +121,7 @@
                 </tr>
             @endforeach
             <tr>
-                <td colspan="7" style="text-align: right">Pendapatan</td>
+                <td colspan="6" style="text-align: right">Pendapatan</td>
                 <td style="text-align: center">{{ currency_IDR($jml_bayar) }}</td>
             </tr>
         </tbody>

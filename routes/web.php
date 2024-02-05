@@ -8,6 +8,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,6 +132,9 @@ Route::middleware(['auth:user'])->group(function(){
     //bulan
     Route::get('/laporan/bulanan', [PesananController::class, 'bulanan']);
     Route::post('/laporan/cetakbulanan', [PesananController::class, 'cetakbulanan']);
+
+    Route::get('/settings', [SettingController::class, 'index']);
+    Route::post('/upsetting', [SettingController::class, 'upsetting']);
 });
 
 
