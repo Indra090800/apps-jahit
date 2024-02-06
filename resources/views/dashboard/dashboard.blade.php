@@ -156,6 +156,7 @@
                                             <div>{{ $p->nama_pelanggan }}</div>
                                             <span class="badge badge-warning">{{ $p->jenis_jahitan }}</span>
                                             <span class="badge badge-danger">{{ $p->status_pesanan == 0 ? 'Not Verified' : ''}}</span>
+                                            <span class="badge badge-danger">{{ $p->tgl_kirim == null ? 'On progress' : ''}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -185,6 +186,11 @@
                                             <span class="badge badge-danger">Not Verified</span>
                                             @else
                                             <span class="badge badge-success"> Verified</span>
+                                            @endif
+                                            @if ($p->tgl_kirim == null)
+                                            <span class="badge badge-danger">On progress</span>
+                                            @else
+                                            <span class="badge badge-success">Paket telah dikirim</span>
                                             @endif
                                         </div>
                                     </div>

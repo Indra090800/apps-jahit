@@ -199,10 +199,10 @@ class PembayaranController extends Controller
         return view('pesanan.editmetode', compact('metode'));
     }
 
-    public function bayar($no_antrian){
+    public function bayar($pesanan_id){
         $bayar = DB::table('tb_pesanan')
         ->leftJoin('tb_jenis', 'tb_pesanan.jenis_id', '=', 'tb_jenis.jenis_id')
-        ->where('no_antrian', $no_antrian)->first();
+        ->where('pesanan_id', $pesanan_id)->first();
         $harga = $bayar->harga;
         $jumlah = $bayar->jumlah;
         $total = $jumlah * $harga;

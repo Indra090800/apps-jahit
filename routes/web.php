@@ -54,7 +54,7 @@ Route::middleware(['auth:buy'])->group(function(){
 
     //metode
     Route::get('/metodebayar', [PembayaranController::class, 'metodebayar']);
-    Route::get('/metodebayar/{no_antrian}', [PembayaranController::class, 'bayar']);
+    Route::get('/metodebayar/{pesanan_id}', [PembayaranController::class, 'bayar']);
     Route::post('/addPembayaran', [PembayaranController::class, 'addPembayaran']);
     Route::get('/editmetode/{pesanan_id}', [PembayaranController::class, 'editmetode']);
     Route::post('/pembayaran/{pembayaran_id}/edit', [PembayaranController::class, 'editPembayaran']);

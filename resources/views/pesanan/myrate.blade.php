@@ -1,7 +1,7 @@
 @extends('layout.presensi');
 @section('header')
 
-    <div class="appHeader bg-success text-light">
+    <div class="appHeader bg-primary text-light">
         <div class="left">
             <a href="javascript:;" class="headerButton goBacc">
                 <ion-icon name="chevron-bacc-outline"></ion-icon>

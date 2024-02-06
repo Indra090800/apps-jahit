@@ -11,7 +11,7 @@
         background-color: #0f3a7e !important;
     }
 </style>
-    <div class="appHeader bg-success text-light">
+    <div class="appHeader bg-primary text-light">
         <div class="left">
             <a href="javascript:;" class="headerButton goBack">
                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -49,7 +49,7 @@
                     <input type="text" name="komentar" id="komentar" placeholder="Komentar Anda" class="form-control">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-success w-100">Kirim</button>
+                    <button class="btn btn-primary w-100">Kirim</button>
                 </div>
             </form>
         </div>

@@ -11,7 +11,7 @@
         background-color: #0f3a7e !important;
     }
 </style>
-    <div class="appHeader bg-success text-light">
+    <div class="appHeader bg-primary text-light">
         <div class="left">
             <a href="javascript:;" class="headerButton goBack">
                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -44,6 +44,9 @@
                 </div>
                 <div class="form-group">
                     <input type="text" value="{{ $pesan->bahan }}" name="bahan" id="bahan" placeholder="Bahan" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" value="{{ $pesan->ukuran }}" name="ukuran" id="ukuran" placeholder="ukuran S/M/L/XL/XXL/XXXL" class="form-control">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success w-100">Kirim</button>

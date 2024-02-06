@@ -132,6 +132,7 @@ class RatingController extends Controller
     {
         $rate = DB::table('tb_pesanan')
         ->leftJoin('tb_jenis', 'tb_jenis.jenis_id', '=', 'tb_pesanan.jenis_id')
+        ->where('pelanggan_id', Auth::guard('buy')->user()->pelanggan_id)
         ->get();
         return view('pesanan.addrate', compact('rate'));
     }
@@ -151,6 +152,7 @@ class RatingController extends Controller
         if(!empty($request->penilaian)){
             $query->where('penilaian', 'like', '%'. $request->penilaian.'%');
         }
+        $query->where('status', 1);
         $my = $query->get();
         return view('pesanan.lihatrate',compact('my', 'rating'));
     }

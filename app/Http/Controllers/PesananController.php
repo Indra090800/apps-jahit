@@ -27,11 +27,12 @@ class PesananController extends Controller
     public function addPesanan(Request $request)
     {
         $pelanggan_id       = Auth::guard('buy')->user()->pelanggan_id;
+        $pesanan_id         = date('dmyHis').$pelanggan_id;
         $jenis_id           = $request->jenis_id;
         $jumlah             = $request->jumlah;
         $bahan              = $request->bahan;
+        $ukuran             = $request->ukuran;
         $status_pesanan     = 0;
-        $no_antrian         = date('dmYhis').'-'.$pelanggan_id;
         $tgl_pemesanan      = $request->tgl_pemesanan;
         $tgl_kirim          = $request->tgl_kirim;
 
@@ -41,14 +42,15 @@ class PesananController extends Controller
                 'jenis_id'             => $jenis_id,
                 'jumlah'               => $jumlah,
                 'bahan'                => $bahan,
+                'ukuran'               => $ukuran,
                 'status_pesanan'       => $status_pesanan,
-                'no_antrian'           => $no_antrian,
+                'pesanan_id'           => $pesanan_id,
                 'tgl_pemesanan'        => $tgl_pemesanan,
                 'tgl_kirim'            => $tgl_kirim,
             ];
             $simpan = DB::table('tb_pesanan')->insert($data);
         if($simpan){
-            return Redirect('/metodebayar/'.$no_antrian)->with(['success' => 'Data Berhasil Di Simpan!!, Silahkan Lanjutkan Metode Pembayaran']);
+            return Redirect('/metodebayar/'.$pesanan_id)->with(['success' => 'Data Berhasil Di Simpan!!, Silahkan Lanjutkan Metode Pembayaran']);
         }
         } catch (\Exception $e) {
             if($e->getCode()==23000){
@@ -66,8 +68,8 @@ class PesananController extends Controller
         $jenis_id           = $request->jenis_id;
         $jumlah             = $request->jumlah;
         $bahan              = $request->bahan;
+        $ukuran             = $request->ukuran;
         $status_pesanan     = 0;
-        $no_antrian         = date('dmYhis').'-'.$pelanggan_id;
         $tgl_pemesanan      = $request->tgl_pemesanan;
         $tgl_kirim          = $request->tgl_kirim;
 
@@ -79,8 +81,8 @@ class PesananController extends Controller
                 'jenis_id'             => $jenis_id,
                 'jumlah'               => $jumlah,
                 'bahan'                => $bahan,
+                'ukuran'               => $ukuran,
                 'status_pesanan'       => $status_pesanan,
-                'no_antrian'           => $no_antrian,
                 'tgl_pemesanan'        => $tgl_pemesanan,
                 'tgl_kirim'            => $tgl_kirim,
             ];
