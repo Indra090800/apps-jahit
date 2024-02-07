@@ -142,6 +142,7 @@ Route::middleware(['auth:user'])->group(function(){
 
     //set req
     Route::post('/req/{req_id}/editSReq', [SettingController::class, 'editSReq']);
+    Route::post('/req/{req_id}/deleteS', [SettingController::class, 'deleteS']);
 });
 
 

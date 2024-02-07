@@ -230,3 +230,29 @@
 </div>
 @endforeach
 @endsection
+
+@push('myscripct')
+
+<script>
+    $(function(){
+        $(".btnEdit").click(function(e){
+                var form = $(this).closest('form');
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Apakah yakin ingin menghapus?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus',
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    form.submit();
+                    Swal.fire('Data Berhasil Di Hapus !!!', '', 'success')
+                }
+                })
+        });
+
+    });
+
+
+</script>
+@endpush
