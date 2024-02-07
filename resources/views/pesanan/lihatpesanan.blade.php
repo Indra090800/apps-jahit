@@ -112,7 +112,13 @@
                                         @else
                                             <button class="btn btn-success btn-sm">{{ $k->tgl_kirim }}</button>
                                         @endif
-                                    <td class="text-center">{{ currency_IDR($bayar->total_bayar) }}</td>
+                                    <td class="text-center">
+                                        @if (empty($bayar->total_bayar))
+                                        <button class="btn btn-warning btn-sm">Segera Bayar</button>
+                                        @else
+                                        {{ currency_IDR($bayar->total_bayar) }}
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             @if ($k->status_pesanan == 0 && !empty($bayar->bukti_bayar))

@@ -58,9 +58,9 @@
             <td style="width: 30px;"><img src="{{ asset('assets/img/icon/i.png') }}" width="100px" height="100px" alt=""></td>
             <td><span id="h3">
                 CETAK STRUK <br>
-                CV. DADE STORE<br>
+                CV. RUMAH JAHIT BAPAK WAHYU<br>
                 </span>
-                <span><i>Jln. Kapten Jamhur No.365, Dsn. Cimenyan II RT 03/08 Desa Mekarsari Kec. Banjar, Banjar</i></span>
+                <span><i>Jalan Raya Sindangkasih No 117, Kecamatan Sindangkasih Kabupaten Ciamis, jawa Barat</i></span>
             </td>
         </tr>
         

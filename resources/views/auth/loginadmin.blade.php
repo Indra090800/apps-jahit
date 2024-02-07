@@ -30,7 +30,7 @@
           <div class="col-lg">
             <div class="container-tight">
               <div class="text-center mb-4">
-                <a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('dist/img/logo.png') }}" height="100" alt=""></a>
+                <a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('assets/img/icon/i.png') }}" height="200" alt=""></a>
               </div>
               <div class="card card-md">
                 <div class="card-body">

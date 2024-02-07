@@ -34,7 +34,7 @@
                 <img src="{{ asset('assets/img/login/login.jpg') }}" alt="image" class="form-image">
             </div>
             <div class="section mt-1">
-                <h1>APPS JaHIT</h1>
+                <h1>RUMAH JAHIT</h1>
                 <h4>Silahkan Login</h4>
             </div>
             <div class="section mt-1 mb-5">

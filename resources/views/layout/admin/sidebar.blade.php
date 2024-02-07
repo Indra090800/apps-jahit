@@ -1,12 +1,12 @@
 <!-- Sidebar -->
-<aside class="navbar navbar-vertical navbar-expand-lg" style="background-color: rgb(21, 255, 0)">
+<aside class="navbar navbar-vertical navbar-expand-lg" style="background-color: rgb(0, 110, 255)">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark">
             <a href="#">
-              APPS JaHIT
+              RUMAH JAHIT
             </a>
           </h1>
           <div class="navbar-nav flex-row d-lg-none">
@@ -136,7 +136,7 @@
           <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
               <li class="nav-item">
-                <a style="color: rgb(24, 23, 23)" class="nav-link" href="/panel/dashboardadmin" >
+                <a style="color: rgb(235, 228, 228)" class="nav-link" href="/panel/dashboardadmin" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
                   </span>
@@ -148,7 +148,7 @@
 
               @if (Auth::guard('user')->user()->id_role == 2)
               <li class="nav-item dropdown">
-                <a style="color: rgb(22, 21, 21)" class="nav-link dropdown-toggle {{ request()->is(['master/*']) ? 'show' : '' }}"  href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ request()->is(['master/*']) ? 'true' : '' }}" >
+                <a style="color: rgb(235, 228, 228)" class="nav-link dropdown-toggle {{ request()->is(['master/*']) ? 'show' : '' }}"  href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ request()->is(['master/*']) ? 'true' : '' }}" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-stack" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" /><path d="M5 21h14" /><path d="M5 18h14" /><path d="M5 15h14" /></svg>
                   </span>
@@ -160,22 +160,22 @@
                   <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
 
-                            <a style="color: black" class="dropdown-item {{ request()->is(['master/harga']) ? 'active' : '' }}" href="/master/harga">
+                            <a style="color: white" class="dropdown-item {{ request()->is(['master/harga']) ? 'active' : '' }}" href="/master/harga">
                             Master Harga
                             </a>
-                            <a style="color: black" class="dropdown-item {{ request()->is(['master/pelanggan']) ? 'active' : '' }}" href="/master/pelanggan">
+                            <a style="color: white" class="dropdown-item {{ request()->is(['master/pelanggan']) ? 'active' : '' }}" href="/master/pelanggan">
                             Master Pelanggan
                             </a>
-                            <a  style="color: black"class="dropdown-item {{ request()->is(['master/pesanan']) ? 'active' : '' }}" href="/master/pesanan">
+                            <a  style="color: white"class="dropdown-item {{ request()->is(['master/pesanan']) ? 'active' : '' }}" href="/master/pesanan">
                             Master Pesanan
                             </a>
-                            <a  style="color: black"class="dropdown-item {{ request()->is(['master/pembayaran']) ? 'active' : '' }}" href="/master/pembayaran">
+                            <a  style="color: white"class="dropdown-item {{ request()->is(['master/pembayaran']) ? 'active' : '' }}" href="/master/pembayaran">
                             Master Pembayaran
                             </a>
-                            <a style="color: black" class="dropdown-item {{ request()->is(['master/rating']) ? 'active' : '' }}" href="/master/rating">
+                            <a style="color: white" class="dropdown-item {{ request()->is(['master/rating']) ? 'active' : '' }}" href="/master/rating">
                             Master Rating
                             </a>
-                            <a style="color: black" class="dropdown-item {{ request()->is(['master/role']) ? 'active' : '' }}" href="/master/role">
+                            <a style="color: white" class="dropdown-item {{ request()->is(['master/role']) ? 'active' : '' }}" href="/master/role">
                             Master Role
                             </a>
 
@@ -187,7 +187,7 @@
 
                 @if (Auth::guard('user')->user()->id_role == 1)
                 <li class="nav-item dropdown">
-                    <a style="color: rgb(22, 21, 21)" class="nav-link dropdown-toggle {{ request()->is(['master/*']) ? 'show' : '' }}"  href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ request()->is(['master/*']) ? 'true' : '' }}" >
+                    <a style="color: rgb(235, 228, 228)" class="nav-link dropdown-toggle {{ request()->is(['master/*']) ? 'show' : '' }}"  href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ request()->is(['master/*']) ? 'true' : '' }}" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-stack" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" /><path d="M5 21h14" /><path d="M5 18h14" /><path d="M5 15h14" /></svg>
                     </span>
@@ -198,7 +198,7 @@
                     <div class="dropdown-menu {{ request()->is(['master/*']) ? 'show' : '' }}">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                        <a style="color: black" class="dropdown-item {{ request()->is(['master/pelanggan']) ? 'active' : '' }}" href="/master/pelanggan">
+                        <a style="color: white" class="dropdown-item {{ request()->is(['master/pelanggan']) ? 'active' : '' }}" href="/master/pelanggan">
                         Master Pelanggan
                         </a>
                         </div>
@@ -209,7 +209,7 @@
 
                 @if (Auth::guard('user')->user()->id_role == 2)
                 <li class="nav-item dropdown">
-                    <a style="color: rgb(22, 21, 21)" class="nav-link dropdown-toggle {{ request()->is(['laporan/*']) ? 'show' : '' }}"  href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ request()->is(['laporan/*']) ? 'true' : '' }}" >
+                    <a style="color: rgb(235, 228, 228)" class="nav-link dropdown-toggle {{ request()->is(['laporan/*']) ? 'show' : '' }}"  href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ request()->is(['laporan/*']) ? 'true' : '' }}" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" /><path d="M18 14v4h4" /><path d="M18 11v-4a2 2 0 0 0 -2 -2h-2" /><path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M8 11h4" /><path d="M8 15h3" /></svg>
                     </span>
@@ -217,14 +217,14 @@
                         Data Report
                     </span>
                     </a>
-                    <div class="dropdown-menu {{ request()->is(['master/*']) ? 'show' : '' }}">
+                    <div class="dropdown-menu {{ request()->is(['laporan/*']) ? 'show' : '' }}">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
 
-                            <a style="color: black" class="dropdown-item {{ request()->is(['laporan/harian']) ? 'active' : '' }}" href="/laporan/harian">
+                            <a style="color: white" class="dropdown-item {{ request()->is(['laporan/harian']) ? 'active' : '' }}" href="/laporan/harian">
                             Laporan Harian
                             </a>
-                            <a style="color: black" class="dropdown-item {{ request()->is(['laporan/bulanan']) ? 'active' : '' }}" href="/laporan/bulanan">
+                            <a style="color: white" class="dropdown-item {{ request()->is(['laporan/bulanan']) ? 'active' : '' }}" href="/laporan/bulanan">
                             Laporan Bulan
                             </a>
 
