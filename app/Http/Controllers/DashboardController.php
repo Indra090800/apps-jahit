@@ -40,7 +40,9 @@ class DashboardController extends Controller
         $cpes = DB::table('tb_pesanan')
         ->selectRaw('COUNT(pesanan_id) as jpes')
         ->first();
-        return view('dashboard.dashboardadmin', compact('cpel', 'cpes'));
+        $req = DB::table('tb_req')->paginate(25);
+        
+        return view('dashboard.dashboardadmin', compact('cpel', 'cpes', 'req'));
     }
 
 }

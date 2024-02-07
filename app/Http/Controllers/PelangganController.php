@@ -163,7 +163,9 @@ class PelangganController extends Controller
     public function pesan()
     {
         $jenis = DB::table('tb_jenis')->get();
-        return view('pesanan.pesan', compact('jenis'));
+        $bahan = DB::table('tb_bahan')->get();
+
+        return view('pesanan.pesan', compact('jenis', 'bahan'));
     }
 
     public function editprofile()

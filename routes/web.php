@@ -70,7 +70,6 @@ Route::middleware(['auth:buy'])->group(function(){
     Route::get('/myrate', [RatingController::class, 'myrate']);
     Route::get('/addrate', [RatingController::class, 'addrate']);
     Route::post('/addRating', [RatingController::class, 'addRating']);
-    Route::post('/rating/{rating_id}/edit', [RatingController::class, 'editRating']);
     Route::post('/rating/{rating_id}/deleteS', [RatingController::class, 'deleteS']);
     //cetak
     Route::get('/cetak', [PembayaranController::class, 'cetak']);
@@ -82,6 +81,11 @@ Route::middleware(['auth:buy'])->group(function(){
     Route::get('/editprofile', [PelangganController::class, 'editprofile']);
     Route::post('/profile/{pelanggan_id}/updateprofile', [PelangganController::class, 'updateprofile']);
 
+    //req
+    Route::get('/req', [SettingController::class, 'req']);
+    Route::get('/addreq', [SettingController::class, 'addreq']);
+    Route::post('/addRequest', [SettingController::class, 'addRequest']);
+    Route::post('/req/{req_id}/deleteS', [SettingController::class, 'deleteS']);
 });
 
 Route::middleware(['auth:user'])->group(function(){
@@ -135,6 +139,9 @@ Route::middleware(['auth:user'])->group(function(){
 
     Route::get('/settings', [SettingController::class, 'index']);
     Route::post('/upsetting', [SettingController::class, 'upsetting']);
+
+    //set req
+    Route::post('/req/{req_id}/editSReq', [SettingController::class, 'editSReq']);
 });
 
 

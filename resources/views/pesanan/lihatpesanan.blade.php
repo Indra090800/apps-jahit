@@ -145,6 +145,10 @@
                                             <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addDesain{{ $k->pesanan_id }}">
                                                 <ion-icon name="add-outline"></ion-icon>
                                             </a>
+                                            &nbsp;
+                                            <a href="/metodebayar" class="btn btn-primary btn-sm">
+                                                <ion-icon name="wallet-outline"></ion-icon>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

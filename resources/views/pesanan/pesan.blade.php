@@ -29,11 +29,14 @@
             <form action="/addPesanan" method="POST" id="frmizin">
                 @csrf
                 <div class="form-group">
+                    <marquee behavior="right"><b>Perhatian!! Apabila jenis dan bahan tidak tersedia di list silahkan gunakan fitur Request di halaman dashboard, Terima Kasih</b></marquee>
+                </div>
+                <div class="form-group">
                     <input type="text" class="form-control datepicker" placeholder="Tanggal" id="tgl_pemesanan" name="tgl_pemesanan">
                 </div>
                 <div class="form-group">
                     <select name="jenis_id" id="jenis_id" class="form-control">
-                        <option value="">Pilih Jenis</option>
+                        <option value="">Pilih Jenis Yang Tersedia</option>
                         @foreach ($jenis as $j)
                             <option value="{{ $j->jenis_id }}">{{ $j->jenis_jahitan }}</option>
                         @endforeach
@@ -43,10 +46,15 @@
                     <input type="text" name="jumlah" id="jumlah" placeholder="Jumlah" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="bahan" id="bahan" placeholder="Bahan" class="form-control">
+                    <select name="jenis_id" id="jenis_id" class="form-control">
+                        <option value="">Pilih Bahan Yang Tersedia</option>
+                        @foreach ($bahan as $j)
+                            <option value="{{ $j->bahan_id }}">{{ $j->bahan }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="ukuran" id="ukuran" placeholder="ukuran S/M/L/XL/XXL/XXXL" class="form-control">
+                    <input type="text" name="ukuran" id="ukuran" placeholder="ukuran S/M/L/XL/XXL/XXXL" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary w-100">Kirim</button>
@@ -65,29 +73,6 @@
             format: "yyyy-mm-dd"
         });
 
-        $("#tgl_pemesanan").change(function(){
-            var tgl_pemesanan = $(this).val();
-            $.ajax({
-                type: 'POST',
-                url: '/presensi/cekpengajuan',
-                data: {
-                    _token:"{{  csrf_token()  }}",
-                    tgl_pemesanan: tgl_pemesanan
-                },
-                cache: false,
-                success: function(respond){
-                    if(respond==1){
-                        Swal.fire({
-                        title: 'Oops!',
-                        text: "Tanggal Hari Ini Sudah Diisi!!",
-                        icon: 'warning',
-                        }).then((result) => {
-                            $("#tgl_pemesanan").val("");
-                        });
-                    }
-                }
-            });
-        });
 
         $("#frmizin").submit(function() {
             var tglizin = $("#tgl_pemesanan").val();

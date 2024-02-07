@@ -144,19 +144,6 @@
                 }
                 })
         });
-        $("#frmmetode").submit(function(){
-            var metode_bayar = $("#metode_bayar").val();
-                var bukti_bayar = $("#fileuploadInput").val();
-
-                if(metode_bayar == "Transfer Bank" && bukti_bayar == ""){
-                    Swal.fire({
-                    title: 'Oops!',
-                    text: "Bukti Bayar harus diisi!!",
-                    icon: 'warning',
-                    });
-                    return false;
-                }
-        });
 
     });
 

@@ -44,12 +44,7 @@ class RatingController extends Controller
             return Redirect('/myrate')->with(['success' => 'Data Berhasil Di Simpan!!']);
         }
         } catch (\Exception $e) {
-            if($e->getCode()==23000){
-                $message = "Data Sudah Ada!!";
-            }else {
-                $message = "Hubungi Tim IT";
-            }
-            return Redirect('/myrate')->with(['error' => 'Data Gagal Di Simpan!! '. $message]);
+            return Redirect('/myrate')->with(['error' => 'Data Gagal Di Simpan!!']);
         }
     }
 

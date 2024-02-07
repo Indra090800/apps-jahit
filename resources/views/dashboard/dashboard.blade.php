@@ -39,12 +39,12 @@
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="/metodebayar" class="danger" style="font-size: 40px;">
-                                    <ion-icon name="wallet-outline"></ion-icon>
+                                <a href="/req" class="danger" style="font-size: 40px;">
+                                    <ion-icon name="archive-outline"></ion-icon>
                                 </a>
                             </div>
                             <div class="menu-name">
-                                <span class="text-center">Transaksi</span>
+                                <span class="text-center">Request Outline</span>
                             </div>
                         </div>
                         <div class="item-menu text-center">
