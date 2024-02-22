@@ -46,7 +46,7 @@
                     <input type="text" name="jumlah" id="jumlah" placeholder="Jumlah" class="form-control">
                 </div>
                 <div class="form-group">
-                    <select name="jenis_id" id="jenis_id" class="form-control">
+                    <select name="bahan" id="bahan" class="form-control">
                         <option value="">Pilih Bahan Yang Tersedia</option>
                         @foreach ($bahan as $j)
                             <option value="{{ $j->bahan_id }}">{{ $j->bahan }}</option>

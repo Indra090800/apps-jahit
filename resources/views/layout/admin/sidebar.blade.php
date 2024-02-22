@@ -169,6 +169,9 @@
                             <a  style="color: white"class="dropdown-item {{ request()->is(['master/pesanan']) ? 'active' : '' }}" href="/master/pesanan">
                             Master Pesanan
                             </a>
+                            <a  style="color: white"class="dropdown-item {{ request()->is(['master/bahan']) ? 'active' : '' }}" href="/master/bahan">
+                                Master Bahan
+                            </a>
                             <a  style="color: white"class="dropdown-item {{ request()->is(['master/pembayaran']) ? 'active' : '' }}" href="/master/pembayaran">
                             Master Pembayaran
                             </a>

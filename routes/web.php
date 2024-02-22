@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BahanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HargaController;
 use App\Http\Controllers\PelangganController;
@@ -121,14 +122,18 @@ Route::middleware(['auth:user'])->group(function(){
     Route::get('/master/pembayaran', [PembayaranController::class, 'index']);
     Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
 
-    Route::post('/pembayaran/{pembayaran_id}/editSPembayaran', [PembayaranController::class, 'editPembayaran']);
+    Route::post('/pembayaran/{pembayaran_id}/editSPembayaran', [PembayaranController::class, 'editSPembayaran']);
 
     //role
     Route::get('/master/role', [RoleController::class, 'index']);
     Route::post('/addRole', [RoleController::class, 'addRole']);
     Route::post('/role/{id_role}/edit', [RoleController::class, 'editRole']);
     Route::post('/role/{id_role}/delete', [RoleController::class, 'delete']);
-
+    //bahan
+    Route::get('/master/bahan', [BahanController::class, 'index']);
+    Route::post('/addBahan', [BahanController::class, 'addBahan']);
+    Route::post('/bahan/{bahan_id}/edit', [BahanController::class, 'editBahan']);
+    Route::post('/bahan/{bahan_id}/delete', [BahanController::class, 'delete']);
     //report
     //harian
     Route::get('/laporan/harian', [PesananController::class, 'harian']);
