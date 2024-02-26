@@ -73,7 +73,7 @@ class PembayaranController extends Controller
         $old_bukti_bayar = $bayar->bukti_bayar;
 
         if($request->hasFile('bukti_bayar')){
-            $bukti_bayar = $bayar->pelanggan_id.".".$request->file('bukti_bayar')->getClientOriginalExtension();
+            $bukti_bayar = $bayar->pelanggan_id.date('s').".".$request->file('bukti_bayar')->getClientOriginalExtension();
         }else{
             $bukti_bayar = null;
         }

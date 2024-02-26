@@ -122,7 +122,7 @@ Route::middleware(['auth:user'])->group(function(){
     Route::get('/master/pembayaran', [PembayaranController::class, 'index']);
     Route::post('/pembayaran/{pembayaran_id}/delete', [PembayaranController::class, 'delete']);
 
-    Route::post('/pembayaran/{pembayaran_id}/editSPembayaran', [PembayaranController::class, 'editSPembayaran']);
+    Route::post('/pembayaran/{pembayaran_id}/editSpembayaran', [PembayaranController::class, 'editSPembayaran']);
 
     //role
     Route::get('/master/role', [RoleController::class, 'index']);
