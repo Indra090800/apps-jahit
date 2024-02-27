@@ -13,7 +13,7 @@
                     <img src="{{ url($path) }}" alt="avatar" class="imaged w64 rounded" style="height: 60px;">
                     @else
                     <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
-                    @endif 
+                    @endif
 
                 </div>
                 <div id="user-info">
@@ -143,16 +143,16 @@
                                 <li>
                                     <div class="item">
                                         <div class="icon-box bg-primary">
-                                            @if (!empty(Auth::guard()->user()->foto_pelanggan))
+                                            @if (!empty($p->foto_pelanggan))
                                             @php
-                                                $path = Storage::url('public/uploads/pelanggan/'.Auth::guard('buy')->user()->foto_pelanggan);
+                                                $path = Storage::url('public/uploads/pelanggan/'.$p->foto_pelanggan);
                                             @endphp
                                             <img src="{{ url($path) }}" alt="avatar" class="imaged w32 rounded" width="30px" height="30px">
                                             @else
                                             <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
-                                            @endif 
+                                            @endif
                                         </div>
-                                        <div class="in">
+                                        <div class="form-group">
                                             <div>{{ $p->nama_pelanggan }}</div>
                                             <span class="badge badge-warning">{{ $p->jenis_jahitan }}</span>
                                             <span class="badge badge-danger">{{ $p->status_pesanan == 0 ? 'Not Verified' : ''}}</span>
@@ -170,16 +170,16 @@
                                 <li>
                                     <div class="item">
                                         <div class="icon-box bg-primary">
-                                            @if (!empty(Auth::guard()->user()->foto_pelanggan))
+                                            @if (!empty($p->foto_pelanggan))
                                             @php
-                                                $path = Storage::url('public/uploads/pelanggan/'.Auth::guard('buy')->user()->foto_pelanggan);
+                                                $path = Storage::url('public/uploads/pelanggan/'.$p->foto_pelanggan);
                                             @endphp
                                             <img src="{{ url($path) }}" alt="avatar" class="imaged w32 rounded" width="30px" height="30px">
                                             @else
                                             <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="avatar" class="imaged w32 rounded" style="height: 40px;">
-                                            @endif 
+                                            @endif
                                         </div>
-                                        <div class="in">
+                                        <div class="form-group">
                                             <div>{{ $p->nama_pelanggan }}</div>
                                             <span class="badge badge-warning">{{ $p->jenis_jahitan }}</span>
                                             @if ($p->status_pesanan == 0)
